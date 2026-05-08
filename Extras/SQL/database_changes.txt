@@ -1,0 +1,371 @@
+ALTER TABLE `static_pages`
+ADD COLUMN `page_is_redirect` ENUM('0','1')
+    CHARACTER SET utf8mb4 
+    COLLATE utf8mb4_general_ci 
+    NOT NULL DEFAULT '0',
+
+ADD COLUMN `page_redirect_url` VARCHAR(256)
+    CHARACTER SET utf8mb4 
+    COLLATE utf8mb4_general_ci 
+    DEFAULT NULL,
+
+ADD COLUMN `page_in_sidebar` ENUM('0','1')
+    CHARACTER SET utf8mb4 
+    COLLATE utf8mb4_general_ci 
+    NOT NULL DEFAULT '0',
+
+ADD COLUMN `page_icon` VARCHAR(256)
+    CHARACTER SET utf8mb4 
+    COLLATE utf8mb4_general_ci 
+    DEFAULT NULL;
+
+
+ALTER TABLE `system_countries`
+ADD COLUMN `country_vat` FLOAT UNSIGNED DEFAULT NULL,
+
+ADD COLUMN `default` ENUM('0','1')
+    CHARACTER SET utf8mb4 
+    COLLATE utf8mb4_general_ci 
+    NOT NULL,
+
+ADD COLUMN `country_order` INT UNSIGNED NOT NULL DEFAULT 1;
+
+ALTER TABLE `users`
+ADD COLUMN `user_master_account` INT NOT NULL DEFAULT 0;
+
+--
+-- Table structure for table `permissions_groups`
+--
+
+CREATE TABLE `permissions_groups` (
+  `permissions_group_id` int UNSIGNED NOT NULL,
+  `permissions_group_title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `pages_permission` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0',
+  `groups_permission` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0',
+  `events_permission` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0',
+  `reels_permission` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0',
+  `watch_permission` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0',
+  `blogs_permission` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0',
+  `blogs_permission_read` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0',
+  `market_permission` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0',
+  `offers_permission` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0',
+  `offers_permission_read` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0',
+  `jobs_permission` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0',
+  `courses_permission` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0',
+  `forums_permission` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0',
+  `movies_permission` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0',
+  `games_permission` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0',
+  `gifts_permission` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0',
+  `stories_permission` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0',
+  `posts_permission` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0',
+  `schedule_posts_permission` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0',
+  `colored_posts_permission` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0',
+  `activity_posts_permission` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0',
+  `polls_posts_permission` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0',
+  `geolocation_posts_permission` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0',
+  `gif_posts_permission` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0',
+  `anonymous_posts_permission` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0',
+  `invitation_permission` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0',
+  `audio_call_permission` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0',
+  `video_call_permission` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0',
+  `live_permission` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0',
+  `videos_upload_permission` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0',
+  `audios_upload_permission` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0',
+  `files_upload_permission` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0',
+  `ads_permission` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0',
+  `funding_permission` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0',
+  `monetization_permission` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0',
+  `tips_permission` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0',
+  `custom_affiliates_system` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0',
+  `affiliates_per_user` float UNSIGNED NOT NULL DEFAULT '0',
+  `affiliates_percentage` float UNSIGNED NOT NULL DEFAULT '0',
+  `affiliates_per_user_2` float UNSIGNED NOT NULL DEFAULT '0',
+  `affiliates_percentage_2` float UNSIGNED NOT NULL DEFAULT '0',
+  `affiliates_per_user_3` float UNSIGNED NOT NULL DEFAULT '0',
+  `affiliates_percentage_3` float UNSIGNED NOT NULL DEFAULT '0',
+  `affiliates_per_user_4` float UNSIGNED NOT NULL DEFAULT '0',
+  `affiliates_percentage_4` float UNSIGNED NOT NULL DEFAULT '0',
+  `affiliates_per_user_5` float UNSIGNED NOT NULL DEFAULT '0',
+  `affiliates_percentage_5` float UNSIGNED NOT NULL DEFAULT '0',
+  `affiliates_per_user_6` float UNSIGNED NOT NULL DEFAULT '0',
+  `affiliates_percentage_6` float UNSIGNED NOT NULL DEFAULT '0',
+  `affiliates_per_user_7` float UNSIGNED NOT NULL DEFAULT '0',
+  `affiliates_percentage_7` float UNSIGNED NOT NULL DEFAULT '0',
+  `affiliates_per_user_8` float UNSIGNED NOT NULL DEFAULT '0',
+  `affiliates_percentage_8` float UNSIGNED NOT NULL DEFAULT '0',
+  `affiliates_per_user_9` float UNSIGNED NOT NULL DEFAULT '0',
+  `affiliates_percentage_9` float UNSIGNED NOT NULL DEFAULT '0',
+  `affiliates_per_user_10` float UNSIGNED NOT NULL DEFAULT '0',
+  `affiliates_percentage_10` float UNSIGNED NOT NULL DEFAULT '0',
+  `custom_points_system` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0',
+  `points_per_currency` int UNSIGNED NOT NULL DEFAULT '100'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `permissions_groups`
+--
+
+INSERT INTO `permissions_groups` (`permissions_group_id`, `permissions_group_title`, `pages_permission`, `groups_permission`, `events_permission`, `reels_permission`, `watch_permission`, `blogs_permission`, `blogs_permission_read`, `market_permission`, `offers_permission`, `offers_permission_read`, `jobs_permission`, `courses_permission`, `forums_permission`, `movies_permission`, `games_permission`, `gifts_permission`, `stories_permission`, `posts_permission`, `schedule_posts_permission`, `colored_posts_permission`, `activity_posts_permission`, `polls_posts_permission`, `geolocation_posts_permission`, `gif_posts_permission`, `anonymous_posts_permission`, `invitation_permission`, `audio_call_permission`, `video_call_permission`, `live_permission`, `videos_upload_permission`, `audios_upload_permission`, `files_upload_permission`, `ads_permission`, `funding_permission`, `monetization_permission`, `tips_permission`, `custom_affiliates_system`, `affiliates_per_user`, `affiliates_percentage`, `affiliates_per_user_2`, `affiliates_percentage_2`, `affiliates_per_user_3`, `affiliates_percentage_3`, `affiliates_per_user_4`, `affiliates_percentage_4`, `affiliates_per_user_5`, `affiliates_percentage_5`, `affiliates_per_user_6`, `affiliates_percentage_6`, `affiliates_per_user_7`, `affiliates_percentage_7`, `affiliates_per_user_8`, `affiliates_percentage_8`, `affiliates_per_user_9`, `affiliates_percentage_9`, `affiliates_per_user_10`, `affiliates_percentage_10`, `custom_points_system`, `points_per_currency`) VALUES
+(1, 'Users Permissions', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '0', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '0', 100),
+(2, 'Verified Permissions', '0', '0', '0', '1', '1', '1', '1', '0', '0', '1', '0', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '0', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '0', 100);
+
+ALTER TABLE `permissions_groups`
+  ADD PRIMARY KEY (`permissions_group_id`);
+
+ALTER TABLE `permissions_groups`
+MODIFY `permissions_group_id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+CREATE TABLE `users_accounts` (
+  `id` int UNSIGNED NOT NULL,
+  `user_id` int UNSIGNED NOT NULL,
+  `account_id` int UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+
+ALTER TABLE `users_accounts`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `user_id_account_id` (`user_id`,`account_id`) USING BTREE;
+
+ALTER TABLE `users_accounts`
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
+
+CREATE TABLE `posts_videos_categories` (
+  `category_id` int UNSIGNED NOT NULL,
+  `category_parent_id` int UNSIGNED NOT NULL,
+  `category_name` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `category_description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `category_order` int UNSIGNED NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `posts_videos_categories`
+--
+
+INSERT INTO `posts_videos_categories` (`category_id`, `category_parent_id`, `category_name`, `category_description`, `category_order`) VALUES
+(1, 0, 'General', '', 1),
+(2, 0, 'Comedy', '', 2),
+(3, 0, 'Economics and Trade', '', 3),
+(4, 0, 'Education', '', 4),
+(5, 0, 'Entertainment', '', 5),
+(6, 0, 'Movies and Animation', '', 6),
+(7, 0, 'Gaming', '', 7),
+(8, 0, 'History and Facts', '', 8),
+(9, 0, 'Live Style', '', 9),
+(10, 0, 'Natural', '', 10),
+(11, 0, 'News and Politics', '', 11),
+(12, 0, 'People and Nations', '', 12),
+(13, 0, 'Pets and Animals', '', 13),
+(14, 0, 'Places and Regions', '', 14),
+(15, 0, 'Science and Technology', '', 15),
+(16, 0, 'Sport', '', 16),
+(17, 0, 'Travel and Events', '', 17),
+(18, 0, 'Other', '', 18);
+
+ALTER TABLE `posts_videos_categories`
+  ADD PRIMARY KEY (`category_id`),
+  ADD KEY `category_parent_id` (`category_parent_id`);
+
+ALTER TABLE `posts_videos_categories`
+  MODIFY `category_id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+ALTER TABLE `users`
+ADD COLUMN `user_monetization_min_price` FLOAT NOT NULL DEFAULT 0;
+
+ALTER TABLE `users`
+ADD COLUMN `user_monetization_plans` INT UNSIGNED NOT NULL DEFAULT 0;
+
+ALTER TABLE `users`
+ADD COLUMN `user_suggestions_hidden` ENUM('0','1')
+CHARACTER SET utf8mb4 
+COLLATE utf8mb4_general_ci 
+NOT NULL DEFAULT '0';
+
+ALTER TABLE `users`
+ADD COLUMN `user_monetization_chat_price` FLOAT NOT NULL DEFAULT 0;
+
+ALTER TABLE `users`
+ADD COLUMN `user_monetization_call_price` FLOAT NOT NULL DEFAULT 0;
+
+ALTER TABLE `users`
+ADD COLUMN `user_privacy_chat` ENUM('me','friends','public')
+CHARACTER SET utf8mb4 
+COLLATE utf8mb4_general_ci 
+NOT NULL DEFAULT 'public';
+
+ALTER TABLE `users`
+ADD COLUMN `user_approved` ENUM('0','1')
+CHARACTER SET utf8mb4 
+COLLATE utf8mb4_general_ci 
+NOT NULL DEFAULT '0';
+
+CREATE TABLE `log_sessions` (
+  `session_id` int UNSIGNED NOT NULL,
+  `session_date` datetime NOT NULL,
+  `session_type` enum('W','A','I') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'W',
+  `session_ip` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `session_user_agent` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `user_browser` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `user_os` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+ALTER TABLE `log_sessions`
+  ADD PRIMARY KEY (`session_id`),
+  ADD KEY `session_ip` (`session_ip`) USING BTREE,
+  ADD KEY `session_user_agent` (`session_user_agent`) USING BTREE,
+  ADD KEY `idx_session_ip_user_agent` (`session_ip`,`session_user_agent`);
+ALTER TABLE `log_sessions`
+  MODIFY `session_id` int UNSIGNED NOT NULL AUTO_INCREMENT;
+
+CREATE TABLE `users_uploads_pending` (
+  `id` int NOT NULL,
+  `user_id` int NOT NULL,
+  `file_name` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `file_size` float NOT NULL,
+  `handle` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `insert_date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+ALTER TABLE `users_uploads_pending`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_file_name` (`file_name`) USING BTREE;
+
+ALTER TABLE `users_uploads_pending`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `conversations`
+ADD COLUMN `node_id` INT UNSIGNED DEFAULT NULL,
+
+ADD COLUMN `node_type` VARCHAR(128)
+    CHARACTER SET utf8mb4 
+    COLLATE utf8mb4_general_ci 
+    DEFAULT NULL;
+
+ALTER TABLE `posts_videos`
+ADD COLUMN `category_id` INT UNSIGNED NOT NULL,
+
+ADD COLUMN `source_240p` VARCHAR(256)
+    CHARACTER SET utf8mb4 
+    COLLATE utf8mb4_general_ci 
+    DEFAULT NULL,
+
+ADD COLUMN `source_360p` VARCHAR(256)
+    CHARACTER SET utf8mb4 
+    COLLATE utf8mb4_general_ci 
+    DEFAULT NULL,
+
+ADD COLUMN `source_480p` VARCHAR(256)
+    CHARACTER SET utf8mb4 
+    COLLATE utf8mb4_general_ci 
+    DEFAULT NULL,
+
+ADD COLUMN `source_720p` VARCHAR(256)
+    CHARACTER SET utf8mb4 
+    COLLATE utf8mb4_general_ci 
+    DEFAULT NULL,
+
+ADD COLUMN `source_1080p` VARCHAR(256)
+    CHARACTER SET utf8mb4 
+    COLLATE utf8mb4_general_ci 
+    DEFAULT NULL,
+
+ADD COLUMN `source_1440p` VARCHAR(256)
+    CHARACTER SET utf8mb4 
+    COLLATE utf8mb4_general_ci 
+    DEFAULT NULL,
+
+ADD COLUMN `source_2160p` VARCHAR(256)
+    CHARACTER SET utf8mb4 
+    COLLATE utf8mb4_general_ci 
+    DEFAULT NULL;
+
+CREATE TABLE `users_uploads` (
+  `id` int NOT NULL,
+  `user_id` int NOT NULL,
+  `file_name` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `file_size` float NOT NULL,
+  `insert_date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+ALTER TABLE `users_uploads`
+  ADD PRIMARY KEY (`id`);
+ALTER TABLE `users_uploads`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+CREATE TABLE `posts_cache` (
+  `cache_id` int UNSIGNED NOT NULL,
+  `cache_date` datetime NOT NULL,
+  `post_id` int UNSIGNED NOT NULL,
+  `user_id` int UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+ALTER TABLE `posts_cache`
+  ADD PRIMARY KEY (`cache_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `post_id` (`post_id`) USING BTREE;
+ALTER TABLE `posts_cache`
+  MODIFY `cache_id` int UNSIGNED NOT NULL AUTO_INCREMENT;
+
+
+ALTER TABLE `posts`
+
+ADD COLUMN `is_schedule` ENUM('0','1')
+    CHARACTER SET utf8mb4 
+    COLLATE utf8mb4_general_ci 
+    NOT NULL DEFAULT '0',
+
+
+ADD COLUMN `views` INT UNSIGNED NOT NULL DEFAULT 0,
+
+ADD COLUMN `post_rate` FLOAT NOT NULL DEFAULT 0,
+
+ADD COLUMN `tips_enabled` ENUM('0','1')
+    CHARACTER SET utf8mb4 
+    COLLATE utf8mb4_general_ci 
+    NOT NULL DEFAULT '0',
+
+ADD COLUMN `for_subscriptions` ENUM('0','1')
+    CHARACTER SET utf8mb4 
+    COLLATE utf8mb4_general_ci 
+    NOT NULL DEFAULT '0',
+
+ADD COLUMN `subscriptions_image` VARCHAR(256)
+    CHARACTER SET utf8mb4 
+    COLLATE utf8mb4_general_ci 
+    DEFAULT NULL,
+
+ADD COLUMN `is_paid` ENUM('0','1')
+    CHARACTER SET utf8mb4 
+    COLLATE utf8mb4_general_ci 
+    NOT NULL DEFAULT '0',
+
+ADD COLUMN `is_paid_locked` ENUM('0','1')
+    CHARACTER SET utf8mb4 
+    COLLATE utf8mb4_general_ci 
+    NOT NULL DEFAULT '0',
+
+ADD COLUMN `post_price` FLOAT UNSIGNED NOT NULL DEFAULT 0,
+
+ADD COLUMN `paid_text` TEXT
+    CHARACTER SET utf8mb4 
+    COLLATE utf8mb4_general_ci,
+
+ADD COLUMN `paid_image` VARCHAR(256)
+    CHARACTER SET utf8mb4 
+    COLLATE utf8mb4_general_ci 
+    DEFAULT NULL,
+
+ADD COLUMN `pre_approved` ENUM('0','1')
+    CHARACTER SET utf8mb4 
+    COLLATE utf8mb4_general_ci 
+    NOT NULL DEFAULT '1',
+
+ADD COLUMN `has_approved` ENUM('0','1')
+    CHARACTER SET utf8mb4 
+    COLLATE utf8mb4_general_ci 
+    NOT NULL DEFAULT '0',
+
+ADD COLUMN `post_latitude` VARCHAR(256)
+    CHARACTER SET utf8mb4 
+    COLLATE utf8mb4_general_ci 
+    NOT NULL DEFAULT '0',
+
+ADD COLUMN `post_longitude` VARCHAR(256)
+    CHARACTER SET utf8mb4 
+    COLLATE utf8mb4_general_ci 
+    NOT NULL DEFAULT '0';
+

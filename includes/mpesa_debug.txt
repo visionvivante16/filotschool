@@ -1,0 +1,84 @@
+Array
+(
+    [output_ResponseCode] => INS-2051
+    [output_ResponseDesc] => MSISDN invalid.
+    [output_TransactionID] => N/A
+    [output_ConversationID] => bc8323d31e3f4692b6af3d8db569b148
+    [output_ThirdPartyReference] => MP69fd8da3254a5
+)
+
+Array
+(
+    [output_ResponseCode] => INS-9
+    [output_ResponseDesc] => Request timeout
+    [output_TransactionID] => N/A
+    [output_ConversationID] => 5aaef6a3d2534f5484b50622fe7e65c3
+    [output_ThirdPartyReference] => MP69fd8dde8d85e
+)
+
+Array
+(
+    [output_ResponseCode] => INS-9
+    [output_ResponseDesc] => Request timeout
+    [output_TransactionID] => N/A
+    [output_ConversationID] => 6dd5b44819b2490db4570f53734ce96c
+    [output_ThirdPartyReference] => MP69fd8e604a775
+)
+
+Array
+(
+    [output_ResponseCode] => INS-13
+    [output_ResponseDesc] => Invalid Shortcode Used
+    [output_TransactionID] => N/A
+    [output_ConversationID] => 785a07a7925d49cc9c7271a41ea5f572
+    [output_ThirdPartyReference] => MP69fd94d490b3d
+)
+
+Array
+(
+    [output_ThirdPartyReference] => MP69fd94d490b3d
+    [output_ConversationID] => 7f20b7282613421f81eb89eace955c9e
+    [output_ResponseCode] => INS-0
+    [output_ResponseDesc] => Successfully Accepted Request
+)
+
+Array
+(
+    [output_ThirdPartyReference] => MP69fd96539ee10
+    [output_ConversationID] => 060f484a74104f6a93640052cef88a73
+    [output_ResponseCode] => INS-0
+    [output_ResponseDesc] => Successfully Accepted Request
+)
+
+Array
+(
+    [output_ThirdPartyReference] => MP69fd97f33e721
+    [output_ConversationID] => 046eacae564a4baaa76326e19c4ab1be
+    [output_ResponseCode] => INS-0
+    [output_ResponseDesc] => Successfully Accepted Request
+)
+
+Array
+(
+    [output_ThirdPartyReference] => MP69fda4a87cf02
+    [output_ConversationID] => 0b45d9059097493382375bc41433b6e6
+    [output_ResponseCode] => INS-0
+    [output_ResponseDesc] => Successfully Accepted Request
+)
+
+Array
+(
+    [output_ThirdPartyReference] => MP69fda53b16e2a
+    [output_ConversationID] => ce6676f481914d369538effa29277e9c
+    [output_ResponseCode] => INS-0
+    [output_ResponseDesc] => Successfully Accepted Request
+)
+
+Array
+(
+    [output_ThirdPartyReference] => 69fda63532ca4
+    [output_ConversationID] => b45dad4af2494ee0beb847c80438895c
+    [output_ResponseCode] => INS-0
+    [output_ResponseDesc] => Successfully Accepted Request
+)
+

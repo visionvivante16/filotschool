@@ -1,0 +1,54 @@
+# Dependency directories
+/vendor/
+/composer.lock
+
+# Backups
+*.zip
+*.sql
+content/backups/
+public_html/*
+
+# Environment files
+.env
+.env.*
+
+# Logs
+*.log
+logs/
+storage/logs/
+
+# Cache files
+cache/
+*.cache
+
+# Session files
+sessions/
+
+# PHPUnit
+/phpunit.xml
+.phpunit.result.cache
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Node (if used with frontend)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Uploads (if dynamically generated)
+uploads/
+public/uploads/
+Updates/
+
+
+# Temporary files
+*.tmp
+*.bak
