@@ -28,7 +28,8 @@ trait BlogsTrait
     $country = !isset($args['country']) ? null : $args['country'];
     $offset = !isset($args['offset']) ? 0 : $args['offset'];
     $random = !isset($args['random']) ? false : true;
-    $results = !isset($args['results']) ? $system['blogs_results'] : $args['results'];
+    // $results = !isset($args['results']) ? $system['blogs_results'] : $args['results'];
+    $results = !isset($args['results']) ? $system['max_results_even'] : $args['results'];
     /* initialize vars */
     $posts = [];
     $offset *= $results;
@@ -40,6 +41,8 @@ trait BlogsTrait
     $where_query = ($category != null) ? sprintf("AND posts_articles.category_id = %s", secure($args['category'], 'int')) : "";
     $order_query = ($random) ? " ORDER BY RAND()" : "ORDER BY posts.post_id DESC ";
     $get_posts = $db->query(sprintf("SELECT posts.post_id FROM posts INNER JOIN posts_articles ON posts.post_id = posts_articles.post_id AND posts.post_type = 'article' LEFT JOIN users AS user_post_author ON posts.user_type = 'user' AND posts.user_id = user_post_author.user_id AND user_post_author.user_banned = '0' LEFT JOIN pages AS page_post_author ON posts.user_type = 'page' AND posts.user_id = page_post_author.page_id WHERE posts.in_group = '0' AND posts.in_event = '0' AND (posts.pre_approved = '1' OR posts.has_approved = '1') " . $where_query . $country_query . $order_query . " LIMIT %s, %s", secure($offset, 'int', false), secure($results, 'int', false)));
+
+
     if ($get_posts->num_rows > 0) {
       while ($post = $get_posts->fetch_assoc()) {
         $post = $this->get_post($post['post_id'], false, false, true);
@@ -48,6 +51,7 @@ trait BlogsTrait
         }
       }
     }
+
     return $posts;
   }
 
