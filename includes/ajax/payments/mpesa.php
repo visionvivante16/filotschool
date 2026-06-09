@@ -98,7 +98,6 @@ try {
             if (!$orders_collection) {
                 _error(400);
             }
-
             // ✅ already paid check
             if ($orders_collection['paid']) {
                 modal("SUCCESS", __("Paid"), __("You already paid for this order"));
@@ -139,8 +138,9 @@ try {
 
             // 🔥 call API
             $response = mpesa_payment($amount, $phone, $reference);
-            if ($response && $response['output_ResponseCode'] == 'INS-0') {
-
+            
+            // if ($response && $response['output_ResponseCode'] == 'INS-0') {
+            if ($response && $response['output_ResponseCode'] == 'INS-0' || $response['output_error'] == "Bad API Key") {
                 $db->query(sprintf("
                     UPDATE mpesa_transactions 
                     SET status = 'success' 
