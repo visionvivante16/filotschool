@@ -1554,7 +1554,7 @@ $(function () {
 
           attempts++;
 
-        $.get('/sngine/includes/ajax/payments/check_mpesa_status.php?ref=' + reference + '&orders_collection_id=' + orders_collection_id, function(res) {
+        $.get('/includes/ajax/payments/check_mpesa_status.php?ref=' + reference + '&orders_collection_id=' + orders_collection_id, function(res) {
 
               if(res.paid) {
 
