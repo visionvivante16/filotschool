@@ -1,0 +1,96 @@
+ct Guidelines
+
+## Project
+
+* Framework: Laravel 12
+* Language: PHP 8+
+* Database: MySQL
+* Follow Laravel conventions whenever possible.
+
+## Coding Standards
+
+* Follow PSR-12.
+* Keep code clean, readable, and maintainable.
+* Avoid code duplication.
+* Prefer dependency injection over static access when practical.
+* Use meaningful class, method, and variable names.
+
+## Architecture
+
+* Keep controllers thin.
+* Move business logic to Services, Actions, or dedicated classes.
+* Use Form Requests for validation.
+* Use Eloquent relationships instead of manual joins when appropriate.
+* Prefer configuration values over hardcoded values.
+* Use queues for long-running tasks.
+
+## Database
+
+* Use foreign keys where appropriate.
+* Add indexes for frequently filtered or joined columns.
+* Avoid N+1 query issues.
+* Use eager loading when needed.
+* Review migrations for performance and consistency.
+
+## Security
+
+Always consider:
+
+* Authentication
+* Authorization
+* Validation
+* Mass assignment protection
+* File upload security
+* Sensitive data exposure
+* SQL injection risks
+* XSS risks
+
+## APIs
+
+When implementing third-party APIs:
+
+* Follow official documentation.
+* Use dedicated service classes.
+* Handle failures gracefully.
+* Add logging where useful.
+* Validate request and response data.
+* Keep credentials in environment variables.
+
+## Testing
+
+When generating tests:
+
+* Prefer Pest.
+* Include positive scenarios.
+* Include negative scenarios.
+* Include validation tests.
+* Include authorization tests.
+* Include edge cases when relevant.
+
+## Code Review
+
+When reviewing code:
+
+1. Identify bugs.
+2. Identify security concerns.
+3. Identify performance concerns.
+4. Identify Laravel best practice violations.
+5. Suggest improvements.
+6. Explain reasoning clearly.
+
+## Explanations
+
+Assume the developer is learning Laravel.
+
+When explaining code:
+
+* Explain the purpose.
+* Explain the business flow.
+* Explain important Laravel concepts involved.
+* Prefer simple language before advanced concepts.
+
+## Important
+
+Do not perform large-scale refactors unless explicitly requested.
+
+Focus only on the files, modules, or tasks requested by the user.

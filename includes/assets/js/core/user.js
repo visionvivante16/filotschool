@@ -32,6 +32,7 @@ api['users/shopping'] = ajax_path + "users/shopping.php";
 api['users/orders'] = ajax_path + "users/orders.php";
 api['users/addresses'] = ajax_path + "users/addresses.php";
 api['users/login_as'] = ajax_path + "users/login_as.php";
+api['users/marketplace_affiliates'] = ajax_path + "users/marketplace_affiliates.php";
 /* modules */
 api['modules/review'] = ajax_path + "modules/review.php";
 api['modules/delete'] = ajax_path + "modules/delete.php";
@@ -81,7 +82,7 @@ function initialize_modal() {
   if ($(".js_clipboard").length > 0) {
     new ClipboardJS('.js_clipboard', {
       container: document.getElementById('modal')
-    });
+    }).on('success', clipboard_success_feedback);
   }
   // run tagify
   if ($(".js_tagify").length > 0) {
@@ -535,7 +536,7 @@ $(function () {
 
   // run Clipboard
   if ($(".js_clipboard").length > 0) {
-    new ClipboardJS('.js_clipboard');
+    new ClipboardJS('.js_clipboard').on('success', clipboard_success_feedback);
   }
 
 
@@ -2699,6 +2700,41 @@ $(function () {
       } else {
         /* go to shopping cart page */
         window.location = site_path + '/market/cart';
+      }
+    }, "json")
+      .fail(function () {
+        /* button reset */
+        button_status(_this, "reset");
+        show_error_modal();
+      });
+  });
+  /* become a marketplace affiliate */
+  $('body').on('click', '.js_marketplace-affiliate-promote', function () {
+    var _this = $(this);
+    var id = _this.data('id');
+    var wrapper = _this.closest('.js_marketplace-affiliate-wrapper');
+    /* button loading */
+    button_status(_this, "loading");
+    /* post the request */
+    $.post(api['users/marketplace_affiliates'], { 'do': 'promote', 'id': id }, function (response) {
+      /* button reset */
+      button_status(_this, "reset");
+      if (response.callback) {
+        eval(response.callback);
+      } else if (response.error) {
+        show_error_modal(response.message);
+      } else if (response.success) {
+        wrapper.html(
+          '<div class="text-muted mb5">' + __['Your Affiliate Link'] + '</div>' +
+          '<div class="input-group">' +
+          '<input type="text" disabled class="form-control" value="' + response.affiliate_link + '">' +
+          '<button type="button" class="btn btn-light js_clipboard" data-clipboard-text="' + response.affiliate_link + '" data-bs-toggle="tooltip" title="' + __['Copy Link'] + '">' +
+          '<i class="fas fa-copy"></i>' +
+          '</button>' +
+          '</div>'
+        );
+        /* bind copy-to-clipboard on the newly injected button (page-ready init only runs for elements that already exist at load time) */
+        new ClipboardJS(wrapper.find('.js_clipboard')[0]).on('success', clipboard_success_feedback);
       }
     }, "json")
       .fail(function () {

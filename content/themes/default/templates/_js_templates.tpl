@@ -24,7 +24,7 @@
       <p>{__("Please log in to continue")}</p>
     </div>
     <div class="modal-footer">
-      <a class="btn btn-primary" href="{$system['system_url']}/signin">{__("Login")}</a>
+      <a class="btn btn-primary js_modal-login-signin" href="{$system['system_url']}/signin">{__("Login")}</a>
     </div>
   </script>
 

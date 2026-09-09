@@ -1413,6 +1413,20 @@ try {
       ]);
       break;
 
+    case 'marketplace_affiliates':
+      /* valid inputs */
+      if (!is_numeric($_POST['marketplace_affiliate_commission_rate']) || $_POST['marketplace_affiliate_commission_rate'] < 0 || $_POST['marketplace_affiliate_commission_rate'] >= 100) {
+        throw new Exception(__("Please enter valid commission >= 0 and < 100"));
+      }
+      /* prepare */
+      $_POST['marketplace_affiliate_enabled'] = (isset($_POST['marketplace_affiliate_enabled'])) ? '1' : '0';
+      /* update */
+      update_system_options([
+        'marketplace_affiliate_enabled' => secure($_POST['marketplace_affiliate_enabled']),
+        'marketplace_affiliate_commission_rate' => secure($_POST['marketplace_affiliate_commission_rate']),
+      ]);
+      break;
+
     case 'funding':
       /* valid inputs */
       if (!is_numeric($_POST['funding_commission']) || $_POST['funding_commission'] < 0 || $_POST['funding_commission'] >= 100) {

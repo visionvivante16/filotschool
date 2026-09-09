@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.7.0, created on 2026-05-08 06:08:33
+/* Smarty version 5.7.0, created on 2026-09-08 12:21:13
   from 'file:_js_templates.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.7.0',
-  'unifunc' => 'content_69fd7de15e1b72_94200530',
+  'unifunc' => 'content_6a9ffdb994ae90_16916158',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '7fcc84896ab6b591486b44afd662e858f3981567' => 
     array (
       0 => '_js_templates.tpl',
-      1 => 1778219803,
+      1 => 1788869050,
       2 => 'file',
     ),
   ),
@@ -21,12 +21,12 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
     'file:__svg_icons.tpl' => 64,
   ),
 ))) {
-function content_69fd7de15e1b72_94200530 (\Smarty\Template $_smarty_tpl) {
+function content_6a9ffdb994ae90_16916158 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/var/www/html/sngine/content/themes/default/templates';
 ?><!-- Toasts --><div class="toast-container p-3 bottom-0 start-0 fixed-bottom"></div><!-- Toasts --><!-- Modals --><div id="modal" class="modal fade"><div class="modal-dialog"><div class="modal-content"><div class="modal-body"><div class="loader pt10 pb10"></div></div></div></div></div><?php echo '<script'; ?>
  id="modal-login" type="text/template"><div class="modal-header"><h6 class="modal-title"><?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("Not Logged In");?>
 </h6></div><div class="modal-body"><p><?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("Please log in to continue");?>
-</p></div><div class="modal-footer"><a class="btn btn-primary" href="<?php echo $_smarty_tpl->getValue('system')['system_url'];?>
+</p></div><div class="modal-footer"><a class="btn btn-primary js_modal-login-signin" href="<?php echo $_smarty_tpl->getValue('system')['system_url'];?>
 /signin"><?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("Login");?>
 </a></div><?php echo '</script'; ?>
 ><?php echo '<script'; ?>

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.7.0, created on 2026-02-13 10:42:51
+/* Smarty version 5.7.0, created on 2026-09-08 07:12:06
   from 'file:__feeds_post.body.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.7.0',
-  'unifunc' => 'content_698f002b9cf4b6_94280917',
+  'unifunc' => 'content_6a9fb546767d11_47162090',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'f464022b363f0734d75954906a588296b9e958e9' => 
     array (
       0 => '__feeds_post.body.tpl',
-      1 => 1766836745,
+      1 => 1788850524,
       2 => 'file',
     ),
   ),
@@ -30,7 +30,7 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
     'file:_need_age_verification.tpl' => 1,
   ),
 ))) {
-function content_698f002b9cf4b6_94280917 (\Smarty\Template $_smarty_tpl) {
+function content_6a9fb546767d11_47162090 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/var/www/html/sngine/content/themes/default/templates';
 ?><!-- post header -->
 <div class="post-header">
@@ -1177,9 +1177,9 @@ if ($_smarty_tpl->getValue('pinned') || $_smarty_tpl->getValue('boosted')) {?>-<
           <div class="post-custom-fileds-wrapper mt10">
             <?php
 $_from = $_smarty_tpl->getSmarty()->getRuntime('Foreach')->init($_smarty_tpl, $_smarty_tpl->getValue('_post')['custom_fields']['basic'], 'custom_field');
-$foreach2DoElse = true;
+$foreach0DoElse = true;
 foreach ($_from ?? [] as $_smarty_tpl->getVariable('custom_field')->value) {
-$foreach2DoElse = false;
+$foreach0DoElse = false;
 ?>
               <?php if ($_smarty_tpl->getValue('custom_field')['value']) {?>
                 <div>
@@ -1249,6 +1249,19 @@ $_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
               </div>
             <?php }?>
           </div>
+          <?php if ($_smarty_tpl->getValue('system')['marketplace_affiliate_enabled']) {?>
+            <div class="mt10 js_marketplace-affiliate-wrapper" data-id="<?php echo $_smarty_tpl->getValue('_post')['post_id'];?>
+">
+              <div class="d-grid">
+                <button type="button" class="btn btn-outline-primary js_marketplace-affiliate-promote" data-id="<?php echo $_smarty_tpl->getValue('_post')['post_id'];?>
+">
+                  <?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("Promote this product and earn");?>
+ <?php echo $_smarty_tpl->getValue('system')['marketplace_affiliate_commission_rate'];?>
+%
+                </button>
+              </div>
+            </div>
+          <?php }?>
         <?php }?>
       </div>
     <?php }?>
@@ -1360,9 +1373,9 @@ $_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
               <div class="post-custom-fileds-wrapper mt10">
                 <?php
 $_from = $_smarty_tpl->getSmarty()->getRuntime('Foreach')->init($_smarty_tpl, $_smarty_tpl->getValue('_post')['custom_fields']['basic'], 'custom_field');
-$foreach3DoElse = true;
+$foreach1DoElse = true;
 foreach ($_from ?? [] as $_smarty_tpl->getVariable('custom_field')->value) {
-$foreach3DoElse = false;
+$foreach1DoElse = false;
 ?>
                   <?php if ($_smarty_tpl->getValue('custom_field')['value']) {?>
                     <div>
@@ -1474,9 +1487,9 @@ $_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
             <div class="post-custom-fileds-wrapper mt10">
               <?php
 $_from = $_smarty_tpl->getSmarty()->getRuntime('Foreach')->init($_smarty_tpl, $_smarty_tpl->getValue('_post')['custom_fields']['basic'], 'custom_field');
-$foreach4DoElse = true;
+$foreach2DoElse = true;
 foreach ($_from ?? [] as $_smarty_tpl->getVariable('custom_field')->value) {
-$foreach4DoElse = false;
+$foreach2DoElse = false;
 ?>
                 <?php if ($_smarty_tpl->getValue('custom_field')['value']) {?>
                   <div>
@@ -1608,9 +1621,9 @@ $_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
             <div class="post-custom-fileds-wrapper mt10">
               <?php
 $_from = $_smarty_tpl->getSmarty()->getRuntime('Foreach')->init($_smarty_tpl, $_smarty_tpl->getValue('_post')['custom_fields']['basic'], 'custom_field');
-$foreach5DoElse = true;
+$foreach3DoElse = true;
 foreach ($_from ?? [] as $_smarty_tpl->getVariable('custom_field')->value) {
-$foreach5DoElse = false;
+$foreach3DoElse = false;
 ?>
                 <?php if ($_smarty_tpl->getValue('custom_field')['value']) {?>
                   <div>
@@ -1663,9 +1676,9 @@ $_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
 ">
         <?php
 $_from = $_smarty_tpl->getSmarty()->getRuntime('Foreach')->init($_smarty_tpl, $_smarty_tpl->getValue('_post')['poll']['options'], 'option');
-$foreach6DoElse = true;
+$foreach4DoElse = true;
 foreach ($_from ?? [] as $_smarty_tpl->getVariable('option')->value) {
-$foreach6DoElse = false;
+$foreach4DoElse = false;
 ?>
           <div class="mb5">
             <div class="poll-option js_poll-vote" data-id="<?php echo $_smarty_tpl->getValue('option')['option_id'];?>

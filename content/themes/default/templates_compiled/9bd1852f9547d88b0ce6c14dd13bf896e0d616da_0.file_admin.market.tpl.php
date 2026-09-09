@@ -1,29 +1,29 @@
 <?php
-/* Smarty version 5.7.0, created on 2026-02-13 10:35:09
+/* Smarty version 5.7.0, created on 2026-09-08 10:29:59
   from 'file:admin.market.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.7.0',
-  'unifunc' => 'content_698efe5decdf51_00975906',
+  'unifunc' => 'content_6a9fe3a728c524_18292178',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '9bd1852f9547d88b0ce6c14dd13bf896e0d616da' => 
     array (
       0 => 'admin.market.tpl',
-      1 => 1766163255,
+      1 => 1788863199,
       2 => 'file',
     ),
   ),
   'includes' => 
   array (
-    'file:__svg_icons.tpl' => 7,
+    'file:__svg_icons.tpl' => 8,
     'file:__categories.recursive_rows.tpl' => 1,
     'file:__categories.recursive_options.tpl' => 2,
   ),
 ))) {
-function content_698efe5decdf51_00975906 (\Smarty\Template $_smarty_tpl) {
+function content_6a9fe3a728c524_18292178 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/var/www/html/sngine/content/themes/default/templates';
 ?><div class="card">
   <div class="card-header with-icon">
@@ -85,6 +85,14 @@ $_smarty_current_dir = '/var/www/html/sngine/content/themes/default/templates';
  &rsaquo; <?php echo $_smarty_tpl->getValue('data')['category_name'];
 }?>
     <?php if ($_smarty_tpl->getValue('sub_view') == "payments") {?> &rsaquo; <?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("Payments Requests");
+}?>
+    <?php if ($_smarty_tpl->getValue('sub_view') == "affiliate_program") {?> &rsaquo; <?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("Affiliate Program");
+}?>
+    <?php if ($_smarty_tpl->getValue('sub_view') == "affiliates") {?> &rsaquo; <?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("Affiliate Program");?>
+ &rsaquo; <?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("Affiliates");
+}?>
+    <?php if ($_smarty_tpl->getValue('sub_view') == "commissions") {?> &rsaquo; <?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("Affiliate Program");?>
+ &rsaquo; <?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("Commissions");
 }?>
   </div>
 
@@ -894,6 +902,349 @@ $_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
           </tbody>
         </table>
       </div>
+    </div>
+
+  <?php } elseif ($_smarty_tpl->getValue('sub_view') == "affiliate_program") {?>
+
+    <form class="js_ajax-forms" data-url="admin/settings.php?edit=marketplace_affiliates">
+      <div class="card-body">
+
+        <div class="form-table-row">
+          <div class="avatar">
+            <?php $_smarty_tpl->renderSubTemplate('file:__svg_icons.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array('icon'=>"market",'class'=>"main-icon",'width'=>"40px",'height'=>"40px"), (int) 0, $_smarty_current_dir);
+?>
+          </div>
+          <div>
+            <div class="form-label h6"><?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("Affiliate Program");?>
+</div>
+            <div class="form-text d-none d-sm-block"><?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("Turn the marketplace affiliate program On and Off");?>
+</div>
+          </div>
+          <div class="text-end">
+            <label class="switch" for="marketplace_affiliate_enabled">
+              <input type="checkbox" name="marketplace_affiliate_enabled" id="marketplace_affiliate_enabled" <?php if ($_smarty_tpl->getValue('system')['marketplace_affiliate_enabled']) {?>checked<?php }?>>
+              <span class="slider round"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="divider dashed"></div>
+
+        <div class="row form-group">
+          <label class="col-md-3 form-label">
+            <?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("Commission");?>
+ (%)
+          </label>
+          <div class="col-md-9">
+            <input type="text" class="form-control" name="marketplace_affiliate_commission_rate" value="<?php echo $_smarty_tpl->getValue('system')['marketplace_affiliate_commission_rate'];?>
+">
+            <div class="form-text">
+              <?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("The percentage an affiliate earns when their referral results in a paid order");?>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- success -->
+        <div class="alert alert-success mt15 mb0 x-hidden"></div>
+        <!-- success -->
+
+        <!-- error -->
+        <div class="alert alert-danger mt15 mb0 x-hidden"></div>
+        <!-- error -->
+      </div>
+      <div class="card-footer text-end">
+        <button type="submit" class="btn btn-primary"><?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("Save Changes");?>
+</button>
+      </div>
+    </form>
+
+  <?php } elseif ($_smarty_tpl->getValue('sub_view') == "affiliates") {?>
+
+    <div class="card-body">
+
+      <!-- filters -->
+      <div class="mb20">
+        <form class="d-flex flex-row align-items-center flex-wrap gap-2" action="<?php echo $_smarty_tpl->getValue('system')['system_url'];?>
+/<?php echo $_smarty_tpl->getValue('control_panel')['url'];?>
+/market/affiliates" method="get">
+          <div class="form-group mb0">
+            <input type="text" class="form-control" name="query" value="<?php echo $_GET['query'];?>
+" placeholder="<?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')('User, Product or Referral Code');?>
+">
+          </div>
+          <div class="form-group mb0">
+            <select class="form-control" name="status">
+              <option value=""><?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("All Statuses");?>
+</option>
+              <option value="active" <?php if ($_GET['status'] == "active") {?>selected<?php }?>><?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("Active");?>
+</option>
+              <option value="suspended" <?php if ($_GET['status'] == "suspended") {?>selected<?php }?>><?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("Suspended");?>
+</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-sm btn-light"><i class="fas fa-search mr5"></i><?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("Filter");?>
+</button>
+        </form>
+      </div>
+      <!-- filters -->
+
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover">
+          <thead>
+            <tr>
+              <th><?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("Affiliate");?>
+</th>
+              <th><?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("Product");?>
+</th>
+              <th><?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("Referral Code");?>
+</th>
+              <th><?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("Clicks");?>
+</th>
+              <th><?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("Sales");?>
+</th>
+              <th><?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("Sales Value");?>
+</th>
+              <th><?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("Commission");?>
+</th>
+              <th><?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("Status");?>
+</th>
+              <th><?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("Created");?>
+</th>
+              <th><?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("Actions");?>
+</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php if ($_smarty_tpl->getValue('rows')) {?>
+              <?php
+$_from = $_smarty_tpl->getSmarty()->getRuntime('Foreach')->init($_smarty_tpl, $_smarty_tpl->getValue('rows'), 'row');
+$foreach6DoElse = true;
+foreach ($_from ?? [] as $_smarty_tpl->getVariable('row')->value) {
+$foreach6DoElse = false;
+?>
+                <tr>
+                  <td>
+                    <a target="_blank" href="<?php echo $_smarty_tpl->getValue('system')['system_url'];?>
+/<?php echo $_smarty_tpl->getValue('row')['user_name'];?>
+">
+                      <img class="tbl-image" src="<?php echo $_smarty_tpl->getValue('row')['user_picture'];?>
+">
+                      <?php echo $_smarty_tpl->getValue('row')['user_fullname'];?>
+
+                    </a>
+                  </td>
+                  <td><?php echo $_smarty_tpl->getValue('row')['product_name'];?>
+</td>
+                  <td><?php echo $_smarty_tpl->getValue('row')['referral_code'];?>
+</td>
+                  <td><?php echo $_smarty_tpl->getValue('row')['clicks_count'];?>
+</td>
+                  <td><?php echo $_smarty_tpl->getValue('row')['sales_count'];?>
+</td>
+                  <td><?php echo $_smarty_tpl->getSmarty()->getModifierCallback('print_money')($_smarty_tpl->getValue('row')['sales_value']);?>
+</td>
+                  <td><?php echo $_smarty_tpl->getSmarty()->getModifierCallback('print_money')($_smarty_tpl->getValue('row')['total_commission']);?>
+</td>
+                  <td>
+                    <?php if ($_smarty_tpl->getValue('row')['status'] == "suspended") {?>
+                      <span class="badge badge-lg bg-danger"><?php echo $_smarty_tpl->getSmarty()->getModifierCallback('ucfirst')($_smarty_tpl->getSmarty()->getModifierCallback('__')($_smarty_tpl->getValue('row')['status']));?>
+</span>
+                    <?php } else { ?>
+                      <span class="badge badge-lg bg-success"><?php echo $_smarty_tpl->getSmarty()->getModifierCallback('ucfirst')($_smarty_tpl->getSmarty()->getModifierCallback('__')($_smarty_tpl->getValue('row')['status']));?>
+</span>
+                    <?php }?>
+                  </td>
+                  <td><span class="js_moment" data-time="<?php echo $_smarty_tpl->getValue('row')['insert_time'];?>
+"><?php echo $_smarty_tpl->getValue('row')['insert_time'];?>
+</span></td>
+                  <td>
+                    <button class="btn btn-sm btn-icon btn-rounded btn-info" data-toggle="modal" data-url="admin/marketplace_affiliates.php?do=view_affiliate&id=<?php echo $_smarty_tpl->getValue('row')['id'];?>
+">
+                      <i class="fa fa-eye"></i>
+                    </button>
+                    <?php if ($_smarty_tpl->getValue('row')['status'] == "suspended") {?>
+                      <button data-bs-toggle="tooltip" title='<?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("Activate");?>
+' class="btn btn-sm btn-icon btn-rounded btn-success js_marketplace-affiliate-admin" data-handle="activate" data-id="<?php echo $_smarty_tpl->getValue('row')['id'];?>
+">
+                        <i class="fa fa-check"></i>
+                      </button>
+                    <?php } else { ?>
+                      <button data-bs-toggle="tooltip" title='<?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("Suspend");?>
+' class="btn btn-sm btn-icon btn-rounded btn-danger js_marketplace-affiliate-admin" data-handle="suspend" data-id="<?php echo $_smarty_tpl->getValue('row')['id'];?>
+">
+                        <i class="fa fa-ban"></i>
+                      </button>
+                    <?php }?>
+                  </td>
+                </tr>
+              <?php
+}
+$_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
+            <?php } else { ?>
+              <tr>
+                <td colspan="10" class="text-center">
+                  <?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("No data to show");?>
+
+                </td>
+              </tr>
+            <?php }?>
+          </tbody>
+        </table>
+      </div>
+
+      <?php echo $_smarty_tpl->getValue('pager');?>
+
+
+    </div>
+
+  <?php } elseif ($_smarty_tpl->getValue('sub_view') == "commissions") {?>
+
+    <div class="card-body">
+
+      <!-- filters -->
+      <div class="mb20">
+        <form class="d-flex flex-row align-items-center flex-wrap gap-2" action="<?php echo $_smarty_tpl->getValue('system')['system_url'];?>
+/<?php echo $_smarty_tpl->getValue('control_panel')['url'];?>
+/market/commissions" method="get">
+          <div class="form-group mb0">
+            <input type="text" class="form-control" name="query" value="<?php echo $_GET['query'];?>
+" placeholder="<?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')('User, Product or Order');?>
+">
+          </div>
+          <div class="form-group mb0">
+            <select class="form-control" name="status">
+              <option value=""><?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("All Statuses");?>
+</option>
+              <option value="pending" <?php if ($_GET['status'] == "pending") {?>selected<?php }?>><?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("Pending");?>
+</option>
+              <option value="approved" <?php if ($_GET['status'] == "approved") {?>selected<?php }?>><?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("Approved");?>
+</option>
+              <option value="rejected" <?php if ($_GET['status'] == "rejected") {?>selected<?php }?>><?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("Rejected");?>
+</option>
+              <option value="cancelled" <?php if ($_GET['status'] == "cancelled") {?>selected<?php }?>><?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("Cancelled");?>
+</option>
+            </select>
+          </div>
+          <div class="form-group mb0">
+            <input type="date" class="form-control" name="date_from" value="<?php echo $_GET['date_from'];?>
+">
+          </div>
+          <div class="form-group mb0">
+            <input type="date" class="form-control" name="date_to" value="<?php echo $_GET['date_to'];?>
+">
+          </div>
+          <button type="submit" class="btn btn-sm btn-light"><i class="fas fa-search mr5"></i><?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("Filter");?>
+</button>
+        </form>
+      </div>
+      <!-- filters -->
+
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover">
+          <thead>
+            <tr>
+              <th><?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("Affiliate");?>
+</th>
+              <th><?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("Product");?>
+</th>
+              <th><?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("Order");?>
+</th>
+              <th><?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("Sale Amount");?>
+</th>
+              <th><?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("Rate");?>
+</th>
+              <th><?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("Commission");?>
+</th>
+              <th><?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("Status");?>
+</th>
+              <th><?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("Date");?>
+</th>
+              <th><?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("Actions");?>
+</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php if ($_smarty_tpl->getValue('rows')) {?>
+              <?php
+$_from = $_smarty_tpl->getSmarty()->getRuntime('Foreach')->init($_smarty_tpl, $_smarty_tpl->getValue('rows'), 'row');
+$foreach7DoElse = true;
+foreach ($_from ?? [] as $_smarty_tpl->getVariable('row')->value) {
+$foreach7DoElse = false;
+?>
+                <tr>
+                  <td>
+                    <a target="_blank" href="<?php echo $_smarty_tpl->getValue('system')['system_url'];?>
+/<?php echo $_smarty_tpl->getValue('row')['user_name'];?>
+">
+                      <img class="tbl-image" src="<?php echo $_smarty_tpl->getValue('row')['user_picture'];?>
+">
+                      <?php echo $_smarty_tpl->getValue('row')['user_fullname'];?>
+
+                    </a>
+                  </td>
+                  <td><?php echo $_smarty_tpl->getValue('row')['product_name'];?>
+</td>
+                  <td><?php echo $_smarty_tpl->getValue('row')['order_hash'];?>
+</td>
+                  <td><?php echo $_smarty_tpl->getSmarty()->getModifierCallback('print_money')($_smarty_tpl->getValue('row')['sale_amount']);?>
+</td>
+                  <td><?php echo $_smarty_tpl->getValue('row')['commission_rate'];?>
+%</td>
+                  <td><?php echo $_smarty_tpl->getSmarty()->getModifierCallback('print_money')($_smarty_tpl->getValue('row')['commission_amount']);?>
+</td>
+                  <td>
+                    <?php if ($_smarty_tpl->getValue('row')['status'] == "approved") {?>
+                      <span class="badge badge-lg bg-success"><?php echo $_smarty_tpl->getSmarty()->getModifierCallback('ucfirst')($_smarty_tpl->getSmarty()->getModifierCallback('__')($_smarty_tpl->getValue('row')['status']));?>
+</span>
+                    <?php } elseif ($_smarty_tpl->getValue('row')['status'] == "rejected" || $_smarty_tpl->getValue('row')['status'] == "cancelled") {?>
+                      <span class="badge badge-lg bg-danger"><?php echo $_smarty_tpl->getSmarty()->getModifierCallback('ucfirst')($_smarty_tpl->getSmarty()->getModifierCallback('__')($_smarty_tpl->getValue('row')['status']));?>
+</span>
+                    <?php } else { ?>
+                      <span class="badge badge-lg bg-info"><?php echo $_smarty_tpl->getSmarty()->getModifierCallback('ucfirst')($_smarty_tpl->getSmarty()->getModifierCallback('__')($_smarty_tpl->getValue('row')['status']));?>
+</span>
+                    <?php }?>
+                  </td>
+                  <td><span class="js_moment" data-time="<?php echo $_smarty_tpl->getValue('row')['insert_time'];?>
+"><?php echo $_smarty_tpl->getValue('row')['insert_time'];?>
+</span></td>
+                  <td>
+                    <button class="btn btn-sm btn-icon btn-rounded btn-info" data-toggle="modal" data-url="admin/marketplace_affiliates.php?do=view_commission&id=<?php echo $_smarty_tpl->getValue('row')['id'];?>
+">
+                      <i class="fa fa-eye"></i>
+                    </button>
+                    <?php if ($_smarty_tpl->getValue('row')['status'] == "pending") {?>
+                      <button data-bs-toggle="tooltip" title='<?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("Approve");?>
+' class="btn btn-sm btn-icon btn-rounded btn-success js_marketplace-affiliate-admin" data-handle="approve_commission" data-id="<?php echo $_smarty_tpl->getValue('row')['id'];?>
+">
+                        <i class="fa fa-check"></i>
+                      </button>
+                      <button data-bs-toggle="tooltip" title='<?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("Reject");?>
+' class="btn btn-sm btn-icon btn-rounded btn-danger js_marketplace-affiliate-admin" data-handle="reject_commission" data-id="<?php echo $_smarty_tpl->getValue('row')['id'];?>
+">
+                        <i class="fa fa-times"></i>
+                      </button>
+                    <?php }?>
+                  </td>
+                </tr>
+              <?php
+}
+$_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
+            <?php } else { ?>
+              <tr>
+                <td colspan="9" class="text-center">
+                  <?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("No data to show");?>
+
+                </td>
+              </tr>
+            <?php }?>
+          </tbody>
+        </table>
+      </div>
+
+      <?php echo $_smarty_tpl->getValue('pager');?>
+
+
     </div>
 
   <?php }?>

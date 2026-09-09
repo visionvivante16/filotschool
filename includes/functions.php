@@ -7611,16 +7611,38 @@ function referer_url()
 {
   /* get the referer URL */
   $referer_url = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '';
-  /* get the request URI from the referer URL */
-  $referer_url = parse_url($referer_url, PHP_URL_PATH);
+  /* get the request URI (path + query) from the referer URL */
+  $parsed_referer_url = parse_url($referer_url);
+  $referer_path = isset($parsed_referer_url['path']) ? $parsed_referer_url['path'] : '';
+  $referer_url = $referer_path . (isset($parsed_referer_url['query']) ? '?' . $parsed_referer_url['query'] : '');
   /* validate and sanitize */
-  if (!empty($referer_url) && $referer_url != "/") {
+  if (!empty($referer_path) && $referer_path != "/") {
     /* disallowed paths */
     $disallowed = ['/favicon.ico', '/robots.txt', '/socket.io'];
-    if (!in_array($referer_url, $disallowed) && strpos($referer_url, "/") === 0) {
+    if (!in_array($referer_path, $disallowed) && strpos($referer_path, "/") === 0) {
       $_SESSION['callback_redirect'] = $referer_url;
     }
   }
+}
+
+
+/**
+ * is_safe_redirect_path
+ *
+ * @param string $url
+ * @return boolean
+ */
+function is_safe_redirect_path($url)
+{
+  if (!is_string($url) || $url === '') {
+    return false;
+  }
+  $parsed_url = parse_url($url);
+  /* reject anything carrying a scheme or host (e.g. "http://evil.com" or "//evil.com") */
+  if (isset($parsed_url['scheme']) || isset($parsed_url['host'])) {
+    return false;
+  }
+  return isset($parsed_url['path']) && strpos($parsed_url['path'], '/') === 0;
 }
 
 

@@ -34,6 +34,9 @@
     {if $sub_view == "add_category"} &rsaquo; {__("Categories")} &rsaquo; {__("Add New Category")}{/if}
     {if $sub_view == "edit_category"} &rsaquo; {__("Categories")} &rsaquo; {$data['category_name']}{/if}
     {if $sub_view == "payments"} &rsaquo; {__("Payments Requests")}{/if}
+    {if $sub_view == "affiliate_program"} &rsaquo; {__("Affiliate Program")}{/if}
+    {if $sub_view == "affiliates"} &rsaquo; {__("Affiliate Program")} &rsaquo; {__("Affiliates")}{/if}
+    {if $sub_view == "commissions"} &rsaquo; {__("Affiliate Program")} &rsaquo; {__("Commissions")}{/if}
   </div>
 
   {if $sub_view == ""}
@@ -641,6 +644,247 @@
           </tbody>
         </table>
       </div>
+    </div>
+
+  {elseif $sub_view == "affiliate_program"}
+
+    <form class="js_ajax-forms" data-url="admin/settings.php?edit=marketplace_affiliates">
+      <div class="card-body">
+
+        <div class="form-table-row">
+          <div class="avatar">
+            {include file='__svg_icons.tpl' icon="market" class="main-icon" width="40px" height="40px"}
+          </div>
+          <div>
+            <div class="form-label h6">{__("Affiliate Program")}</div>
+            <div class="form-text d-none d-sm-block">{__("Turn the marketplace affiliate program On and Off")}</div>
+          </div>
+          <div class="text-end">
+            <label class="switch" for="marketplace_affiliate_enabled">
+              <input type="checkbox" name="marketplace_affiliate_enabled" id="marketplace_affiliate_enabled" {if $system['marketplace_affiliate_enabled']}checked{/if}>
+              <span class="slider round"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="divider dashed"></div>
+
+        <div class="row form-group">
+          <label class="col-md-3 form-label">
+            {__("Commission")} (%)
+          </label>
+          <div class="col-md-9">
+            <input type="text" class="form-control" name="marketplace_affiliate_commission_rate" value="{$system['marketplace_affiliate_commission_rate']}">
+            <div class="form-text">
+              {__("The percentage an affiliate earns when their referral results in a paid order")}
+            </div>
+          </div>
+        </div>
+
+        <!-- success -->
+        <div class="alert alert-success mt15 mb0 x-hidden"></div>
+        <!-- success -->
+
+        <!-- error -->
+        <div class="alert alert-danger mt15 mb0 x-hidden"></div>
+        <!-- error -->
+      </div>
+      <div class="card-footer text-end">
+        <button type="submit" class="btn btn-primary">{__("Save Changes")}</button>
+      </div>
+    </form>
+
+  {elseif $sub_view == "affiliates"}
+
+    <div class="card-body">
+
+      <!-- filters -->
+      <div class="mb20">
+        <form class="d-flex flex-row align-items-center flex-wrap gap-2" action="{$system['system_url']}/{$control_panel['url']}/market/affiliates" method="get">
+          <div class="form-group mb0">
+            <input type="text" class="form-control" name="query" value="{$smarty.get.query}" placeholder="{__('User, Product or Referral Code')}">
+          </div>
+          <div class="form-group mb0">
+            <select class="form-control" name="status">
+              <option value="">{__("All Statuses")}</option>
+              <option value="active" {if $smarty.get.status == "active"}selected{/if}>{__("Active")}</option>
+              <option value="suspended" {if $smarty.get.status == "suspended"}selected{/if}>{__("Suspended")}</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-sm btn-light"><i class="fas fa-search mr5"></i>{__("Filter")}</button>
+        </form>
+      </div>
+      <!-- filters -->
+
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover">
+          <thead>
+            <tr>
+              <th>{__("Affiliate")}</th>
+              <th>{__("Product")}</th>
+              <th>{__("Referral Code")}</th>
+              <th>{__("Clicks")}</th>
+              <th>{__("Sales")}</th>
+              <th>{__("Sales Value")}</th>
+              <th>{__("Commission")}</th>
+              <th>{__("Status")}</th>
+              <th>{__("Created")}</th>
+              <th>{__("Actions")}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {if $rows}
+              {foreach $rows as $row}
+                <tr>
+                  <td>
+                    <a target="_blank" href="{$system['system_url']}/{$row['user_name']}">
+                      <img class="tbl-image" src="{$row['user_picture']}">
+                      {$row['user_fullname']}
+                    </a>
+                  </td>
+                  <td>{$row['product_name']}</td>
+                  <td>{$row['referral_code']}</td>
+                  <td>{$row['clicks_count']}</td>
+                  <td>{$row['sales_count']}</td>
+                  <td>{print_money($row['sales_value'])}</td>
+                  <td>{print_money($row['total_commission'])}</td>
+                  <td>
+                    {if $row['status'] == "suspended"}
+                      <span class="badge badge-lg bg-danger">{__($row['status'])|ucfirst}</span>
+                    {else}
+                      <span class="badge badge-lg bg-success">{__($row['status'])|ucfirst}</span>
+                    {/if}
+                  </td>
+                  <td><span class="js_moment" data-time="{$row['insert_time']}">{$row['insert_time']}</span></td>
+                  <td>
+                    <button class="btn btn-sm btn-icon btn-rounded btn-info" data-toggle="modal" data-url="admin/marketplace_affiliates.php?do=view_affiliate&id={$row['id']}">
+                      <i class="fa fa-eye"></i>
+                    </button>
+                    {if $row['status'] == "suspended"}
+                      <button data-bs-toggle="tooltip" title='{__("Activate")}' class="btn btn-sm btn-icon btn-rounded btn-success js_marketplace-affiliate-admin" data-handle="activate" data-id="{$row['id']}">
+                        <i class="fa fa-check"></i>
+                      </button>
+                    {else}
+                      <button data-bs-toggle="tooltip" title='{__("Suspend")}' class="btn btn-sm btn-icon btn-rounded btn-danger js_marketplace-affiliate-admin" data-handle="suspend" data-id="{$row['id']}">
+                        <i class="fa fa-ban"></i>
+                      </button>
+                    {/if}
+                  </td>
+                </tr>
+              {/foreach}
+            {else}
+              <tr>
+                <td colspan="10" class="text-center">
+                  {__("No data to show")}
+                </td>
+              </tr>
+            {/if}
+          </tbody>
+        </table>
+      </div>
+
+      {$pager}
+
+    </div>
+
+  {elseif $sub_view == "commissions"}
+
+    <div class="card-body">
+
+      <!-- filters -->
+      <div class="mb20">
+        <form class="d-flex flex-row align-items-center flex-wrap gap-2" action="{$system['system_url']}/{$control_panel['url']}/market/commissions" method="get">
+          <div class="form-group mb0">
+            <input type="text" class="form-control" name="query" value="{$smarty.get.query}" placeholder="{__('User, Product or Order')}">
+          </div>
+          <div class="form-group mb0">
+            <select class="form-control" name="status">
+              <option value="">{__("All Statuses")}</option>
+              <option value="pending" {if $smarty.get.status == "pending"}selected{/if}>{__("Pending")}</option>
+              <option value="approved" {if $smarty.get.status == "approved"}selected{/if}>{__("Approved")}</option>
+              <option value="rejected" {if $smarty.get.status == "rejected"}selected{/if}>{__("Rejected")}</option>
+              <option value="cancelled" {if $smarty.get.status == "cancelled"}selected{/if}>{__("Cancelled")}</option>
+            </select>
+          </div>
+          <div class="form-group mb0">
+            <input type="date" class="form-control" name="date_from" value="{$smarty.get.date_from}">
+          </div>
+          <div class="form-group mb0">
+            <input type="date" class="form-control" name="date_to" value="{$smarty.get.date_to}">
+          </div>
+          <button type="submit" class="btn btn-sm btn-light"><i class="fas fa-search mr5"></i>{__("Filter")}</button>
+        </form>
+      </div>
+      <!-- filters -->
+
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover">
+          <thead>
+            <tr>
+              <th>{__("Affiliate")}</th>
+              <th>{__("Product")}</th>
+              <th>{__("Order")}</th>
+              <th>{__("Sale Amount")}</th>
+              <th>{__("Rate")}</th>
+              <th>{__("Commission")}</th>
+              <th>{__("Status")}</th>
+              <th>{__("Date")}</th>
+              <th>{__("Actions")}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {if $rows}
+              {foreach $rows as $row}
+                <tr>
+                  <td>
+                    <a target="_blank" href="{$system['system_url']}/{$row['user_name']}">
+                      <img class="tbl-image" src="{$row['user_picture']}">
+                      {$row['user_fullname']}
+                    </a>
+                  </td>
+                  <td>{$row['product_name']}</td>
+                  <td>{$row['order_hash']}</td>
+                  <td>{print_money($row['sale_amount'])}</td>
+                  <td>{$row['commission_rate']}%</td>
+                  <td>{print_money($row['commission_amount'])}</td>
+                  <td>
+                    {if $row['status'] == "approved"}
+                      <span class="badge badge-lg bg-success">{__($row['status'])|ucfirst}</span>
+                    {elseif $row['status'] == "rejected" || $row['status'] == "cancelled"}
+                      <span class="badge badge-lg bg-danger">{__($row['status'])|ucfirst}</span>
+                    {else}
+                      <span class="badge badge-lg bg-info">{__($row['status'])|ucfirst}</span>
+                    {/if}
+                  </td>
+                  <td><span class="js_moment" data-time="{$row['insert_time']}">{$row['insert_time']}</span></td>
+                  <td>
+                    <button class="btn btn-sm btn-icon btn-rounded btn-info" data-toggle="modal" data-url="admin/marketplace_affiliates.php?do=view_commission&id={$row['id']}">
+                      <i class="fa fa-eye"></i>
+                    </button>
+                    {if $row['status'] == "pending"}
+                      <button data-bs-toggle="tooltip" title='{__("Approve")}' class="btn btn-sm btn-icon btn-rounded btn-success js_marketplace-affiliate-admin" data-handle="approve_commission" data-id="{$row['id']}">
+                        <i class="fa fa-check"></i>
+                      </button>
+                      <button data-bs-toggle="tooltip" title='{__("Reject")}' class="btn btn-sm btn-icon btn-rounded btn-danger js_marketplace-affiliate-admin" data-handle="reject_commission" data-id="{$row['id']}">
+                        <i class="fa fa-times"></i>
+                      </button>
+                    {/if}
+                  </td>
+                </tr>
+              {/foreach}
+            {else}
+              <tr>
+                <td colspan="9" class="text-center">
+                  {__("No data to show")}
+                </td>
+              </tr>
+            {/if}
+          </tbody>
+        </table>
+      </div>
+
+      {$pager}
+
     </div>
 
   {/if}
