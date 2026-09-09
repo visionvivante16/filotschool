@@ -7669,6 +7669,29 @@ function system_domain_root()
 }
 
 
+/**
+ * base64url_decode
+ *
+ * Decodes the base64url encoding used for the ?redirect= param (see
+ * core.js). Plain encodeURIComponent() puts a literal "%3F"/"%26" in the
+ * URL, which some hosting WAFs (mod_security) block outright, so the
+ * redirect path travels base64url-encoded instead - a value made up of
+ * only letters, digits, "-" and "_".
+ *
+ * @param string $str
+ * @return string|false
+ */
+function base64url_decode($str)
+{
+  $str = strtr($str, '-_', '+/');
+  $padding = strlen($str) % 4;
+  if ($padding) {
+    $str .= str_repeat('=', 4 - $padding);
+  }
+  return base64_decode($str, true);
+}
+
+
 
 /* ------------------------------- */
 /* Modal */

@@ -847,10 +847,13 @@ $(function () {
 
   // run bootstrap modal
   // carry the current page (path + query, e.g. an affiliate ?ref=) through to signin so login can redirect back to it
+  // base64url-encoded (not encodeURIComponent) so the value never contains a literal "%3F"/"%26" -
+  // some hosting WAFs (mod_security) block requests whose query string carries an encoded "?"
   $('body').on('click', '.js_modal-login-signin', function (e) {
     e.preventDefault();
     var redirect = window.location.pathname + window.location.search;
-    window.location.href = $(this).attr('href') + '?redirect=' + encodeURIComponent(redirect);
+    var encoded = btoa(unescape(encodeURIComponent(redirect))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+    window.location.href = $(this).attr('href') + '?redirect=' + encoded;
   });
 
 

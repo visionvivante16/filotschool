@@ -20,8 +20,9 @@ try {
       }
 
       // get the redirect destination (prefer an explicit ?redirect= over the HTTP referer, which is unreliable/lossy)
-      if (isset($_GET['redirect']) && is_safe_redirect_path($_GET['redirect'])) {
-        $_SESSION['callback_redirect'] = $_GET['redirect'];
+      $decoded_redirect = (isset($_GET['redirect'])) ? base64url_decode($_GET['redirect']) : false;
+      if ($decoded_redirect !== false && is_safe_redirect_path($decoded_redirect)) {
+        $_SESSION['callback_redirect'] = $decoded_redirect;
       } else {
         referer_url();
       }
@@ -61,8 +62,9 @@ try {
       }
 
       // get the redirect destination (prefer an explicit ?redirect= over the HTTP referer, which is unreliable/lossy)
-      if (isset($_GET['redirect']) && is_safe_redirect_path($_GET['redirect'])) {
-        $_SESSION['callback_redirect'] = $_GET['redirect'];
+      $decoded_redirect = (isset($_GET['redirect'])) ? base64url_decode($_GET['redirect']) : false;
+      if ($decoded_redirect !== false && is_safe_redirect_path($decoded_redirect)) {
+        $_SESSION['callback_redirect'] = $decoded_redirect;
       } else {
         referer_url();
       }
