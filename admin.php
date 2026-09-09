@@ -3286,6 +3286,96 @@ try {
           page_header($control_panel['title'] . " &rsaquo; " . __("Marketplace"));
           break;
 
+        case 'affiliate_program':
+          // page header
+          page_header($control_panel['title'] . " &rsaquo; " . __("Marketplace") . " &rsaquo; " . __("Affiliate Program"));
+          break;
+
+        case 'affiliates':
+          // page header
+          page_header($control_panel['title'] . " &rsaquo; " . __("Marketplace") . " &rsaquo; " . __("Affiliate Program") . " &rsaquo; " . __("Affiliates"));
+
+          // build filters
+          $where = "1";
+          if (isset($_GET['status']) && in_array($_GET['status'], ['active', 'suspended'])) {
+            $where .= sprintf(" AND marketplace_affiliates.status = %s", secure($_GET['status']));
+          }
+          if (isset($_GET['query']) && !is_empty($_GET['query'])) {
+            $where .= sprintf(" AND (users.user_name LIKE %1\$s OR posts_products.name LIKE %1\$s OR marketplace_affiliates.referral_code LIKE %1\$s)", secure($_GET['query'], 'search'));
+          }
+
+          // get data
+          require('includes/class-pager.php');
+          $params['selected_page'] = (!isset($_GET['page']) || (int) $_GET['page'] == 0) ? 1 : $_GET['page'];
+          $total = $db->query("SELECT COUNT(*) as count FROM marketplace_affiliates INNER JOIN users ON marketplace_affiliates.user_id = users.user_id INNER JOIN posts_products ON marketplace_affiliates.product_post_id = posts_products.post_id WHERE $where");
+          $params['total_items'] = $total->fetch_assoc()['count'];
+          $params['items_per_page'] = $system['max_results'];
+          $params['url'] = $system['system_url'] . '/' . $control_panel['url'] . '/market/affiliates?page=%s';
+          $pager = new Pager($params);
+          $limit_query = $pager->getLimitSql();
+          $get_rows = $db->query("SELECT marketplace_affiliates.*, users.user_name, users.user_firstname, users.user_lastname, users.user_gender, users.user_picture, posts_products.name AS product_name,
+            (SELECT COUNT(*) FROM marketplace_affiliate_commissions WHERE marketplace_affiliate_commissions.marketplace_affiliate_id = marketplace_affiliates.id) AS sales_count,
+            (SELECT COALESCE(SUM(sale_amount), 0) FROM marketplace_affiliate_commissions WHERE marketplace_affiliate_commissions.marketplace_affiliate_id = marketplace_affiliates.id) AS sales_value,
+            (SELECT COALESCE(SUM(commission_amount), 0) FROM marketplace_affiliate_commissions WHERE marketplace_affiliate_commissions.marketplace_affiliate_id = marketplace_affiliates.id) AS total_commission
+            FROM marketplace_affiliates INNER JOIN users ON marketplace_affiliates.user_id = users.user_id INNER JOIN posts_products ON marketplace_affiliates.product_post_id = posts_products.post_id WHERE $where ORDER BY marketplace_affiliates.id DESC " . $limit_query);
+          $rows = [];
+          if ($get_rows->num_rows > 0) {
+            while ($row = $get_rows->fetch_assoc()) {
+              $row['user_picture'] = get_picture($row['user_picture'], $row['user_gender']);
+              $row['user_fullname'] = ($system['show_usernames_enabled']) ? $row['user_name'] : $row['user_firstname'] . " " . $row['user_lastname'];
+              $rows[] = $row;
+            }
+          }
+
+          // assign variables
+          $smarty->assign('rows', $rows);
+          $smarty->assign('pager', $pager->getPager());
+          break;
+
+        case 'commissions':
+          // page header
+          page_header($control_panel['title'] . " &rsaquo; " . __("Marketplace") . " &rsaquo; " . __("Affiliate Program") . " &rsaquo; " . __("Commissions"));
+
+          // build filters
+          $where = "1";
+          if (isset($_GET['status']) && in_array($_GET['status'], ['pending', 'approved', 'rejected', 'cancelled'])) {
+            $where .= sprintf(" AND marketplace_affiliate_commissions.status = %s", secure($_GET['status']));
+          }
+          if (isset($_GET['query']) && !is_empty($_GET['query'])) {
+            $where .= sprintf(" AND (users.user_name LIKE %1\$s OR posts_products.name LIKE %1\$s OR orders.order_hash LIKE %1\$s)", secure($_GET['query'], 'search'));
+          }
+          if (isset($_GET['date_from']) && !is_empty($_GET['date_from'])) {
+            $where .= sprintf(" AND marketplace_affiliate_commissions.insert_time >= %s", secure($_GET['date_from'] . " 00:00:00", 'datetime'));
+          }
+          if (isset($_GET['date_to']) && !is_empty($_GET['date_to'])) {
+            $where .= sprintf(" AND marketplace_affiliate_commissions.insert_time <= %s", secure($_GET['date_to'] . " 23:59:59", 'datetime'));
+          }
+
+          // get data
+          require('includes/class-pager.php');
+          $params['selected_page'] = (!isset($_GET['page']) || (int) $_GET['page'] == 0) ? 1 : $_GET['page'];
+          $total = $db->query("SELECT COUNT(*) as count FROM marketplace_affiliate_commissions INNER JOIN users ON marketplace_affiliate_commissions.user_id = users.user_id INNER JOIN posts_products ON marketplace_affiliate_commissions.product_post_id = posts_products.post_id INNER JOIN orders ON marketplace_affiliate_commissions.order_id = orders.order_id WHERE $where");
+          $params['total_items'] = $total->fetch_assoc()['count'];
+          $params['items_per_page'] = $system['max_results'];
+          $params['url'] = $system['system_url'] . '/' . $control_panel['url'] . '/market/commissions?page=%s';
+          $pager = new Pager($params);
+          $limit_query = $pager->getLimitSql();
+          $get_rows = $db->query("SELECT marketplace_affiliate_commissions.*, users.user_name, users.user_firstname, users.user_lastname, users.user_gender, users.user_picture, posts_products.name AS product_name, orders.order_hash
+            FROM marketplace_affiliate_commissions INNER JOIN users ON marketplace_affiliate_commissions.user_id = users.user_id INNER JOIN posts_products ON marketplace_affiliate_commissions.product_post_id = posts_products.post_id INNER JOIN orders ON marketplace_affiliate_commissions.order_id = orders.order_id WHERE $where ORDER BY marketplace_affiliate_commissions.id DESC " . $limit_query);
+          $rows = [];
+          if ($get_rows->num_rows > 0) {
+            while ($row = $get_rows->fetch_assoc()) {
+              $row['user_picture'] = get_picture($row['user_picture'], $row['user_gender']);
+              $row['user_fullname'] = ($system['show_usernames_enabled']) ? $row['user_name'] : $row['user_firstname'] . " " . $row['user_lastname'];
+              $rows[] = $row;
+            }
+          }
+
+          // assign variables
+          $smarty->assign('rows', $rows);
+          $smarty->assign('pager', $pager->getPager());
+          break;
+
         case 'products':
           // page header
           page_header($control_panel['title'] . " &rsaquo; " . __("Marketplace") . " &rsaquo; " . __("Products"));

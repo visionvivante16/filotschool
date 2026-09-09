@@ -756,6 +756,21 @@
                           {__("Payment Requests")}
                         </a>
                       </li>
+                      <li {if $view == "market" && $sub_view == "affiliate_program"}class="active" {/if}>
+                        <a href="{$system['system_url']}/{$control_panel['url']}/market/affiliate_program">
+                          {__("Affiliate Program")}
+                        </a>
+                      </li>
+                      <li {if $view == "market" && $sub_view == "affiliates"}class="active" {/if}>
+                        <a href="{$system['system_url']}/{$control_panel['url']}/market/affiliates">
+                          {__("List Affiliates")}
+                        </a>
+                      </li>
+                      <li {if $view == "market" && $sub_view == "commissions"}class="active" {/if}>
+                        <a href="{$system['system_url']}/{$control_panel['url']}/market/commissions">
+                          {__("List Commissions")}
+                        </a>
+                      </li>
                     </ul>
                   </div>
                 </li>

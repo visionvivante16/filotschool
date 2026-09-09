@@ -868,6 +868,15 @@
               </div>
             {/if}
           </div>
+          {if $system['marketplace_affiliate_enabled']}
+            <div class="mt10 js_marketplace-affiliate-wrapper" data-id="{$_post['post_id']}">
+              <div class="d-grid">
+                <button type="button" class="btn btn-outline-primary js_marketplace-affiliate-promote" data-id="{$_post['post_id']}">
+                  {__("Promote this product and earn")} {$system['marketplace_affiliate_commission_rate']}%
+                </button>
+              </div>
+            </div>
+          {/if}
         {/if}
       </div>
     {/if}

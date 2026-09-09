@@ -403,6 +403,17 @@ function modal() {
   }
 }
 
+// show a temporary "Copied!" tooltip on a ClipboardJS success event
+function clipboard_success_feedback(e) {
+  var btn = $(e.trigger);
+  var original_title = btn.attr('data-bs-original-title') || btn.attr('title');
+  btn.attr('data-bs-original-title', __['Copied!']).tooltip('show');
+  setTimeout(function () {
+    btn.attr('data-bs-original-title', original_title).tooltip('hide');
+  }, 1200);
+  e.clearSelection();
+}
+
 // error modal
 function show_error_modal(message = __['There is something that went wrong!']) {
   modal('#modal-message', { title: __['Error'], message: message });
@@ -835,6 +846,14 @@ $(function () {
 
 
   // run bootstrap modal
+  // carry the current page (path + query, e.g. an affiliate ?ref=) through to signin so login can redirect back to it
+  $('body').on('click', '.js_modal-login-signin', function (e) {
+    e.preventDefault();
+    var redirect = window.location.pathname + window.location.search;
+    window.location.href = $(this).attr('href') + '?redirect=' + encodeURIComponent(redirect);
+  });
+
+
   $('body').on('click', '[data-toggle="modal"]', function (e) {
     e.preventDefault();
     if ($(e.target).hasClass('link') && $(e.target).hasClass('disabled')) {

@@ -16,6 +16,7 @@ api['admin/bank'] = ajax_path + "admin/bank.php";
 api['admin/withdraw'] = ajax_path + "admin/withdraw.php";
 api['admin/tagify'] = ajax_path + "admin/tagify.php";
 api['admin/reset'] = ajax_path + "admin/reset.php";
+api['admin/marketplace_affiliates'] = ajax_path + "admin/marketplace_affiliates.php";
 
 
 // tagify_ajax
@@ -292,6 +293,44 @@ $(function () {
     }
     confirm(_title, _message, function () {
       $.post(api['admin/withdraw'], { 'type': type, 'handle': handle, 'id': id }, function (response) {
+        /* check the response */
+        if (response.callback) {
+          eval(response.callback);
+        } else {
+          window.location.reload();
+        }
+      }, 'json')
+        .fail(function () {
+          show_error_modal();
+        });
+    });
+  });
+
+
+  // marketplace affiliate admin actions
+  $('body').on('click', '.js_marketplace-affiliate-admin', function () {
+    var handle = $(this).data('handle');
+    var id = $(this).data('id');
+    switch (handle) {
+      case 'suspend':
+        var _title = __['Suspend'];
+        var _message = __['Are you sure you want to suspend this affiliate?'];
+        break;
+      case 'activate':
+        var _title = __['Activate'];
+        var _message = __['Are you sure you want to activate this affiliate?'];
+        break;
+      case 'approve_commission':
+        var _title = __['Approve'];
+        var _message = __['Are you sure you want to approve this commission?'];
+        break;
+      case 'reject_commission':
+        var _title = __['Reject'];
+        var _message = __['Are you sure you want to reject this commission?'];
+        break;
+    }
+    confirm(_title, _message, function () {
+      $.post(api['admin/marketplace_affiliates'], { 'handle': handle, 'id': id }, function (response) {
         /* check the response */
         if (response.callback) {
           eval(response.callback);

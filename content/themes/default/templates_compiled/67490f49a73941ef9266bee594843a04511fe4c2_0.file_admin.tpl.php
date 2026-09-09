@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.7.0, created on 2026-02-13 10:34:37
+/* Smarty version 5.7.0, created on 2026-09-08 10:15:29
   from 'file:admin.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.7.0',
-  'unifunc' => 'content_698efe3d808034_61209251',
+  'unifunc' => 'content_6a9fe0414d5f07_51734956',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '67490f49a73941ef9266bee594843a04511fe4c2' => 
     array (
       0 => 'admin.tpl',
-      1 => 1766180846,
+      1 => 1788862013,
       2 => 'file',
     ),
   ),
@@ -24,7 +24,7 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
     'file:_footer.tpl' => 1,
   ),
 ))) {
-function content_698efe3d808034_61209251 (\Smarty\Template $_smarty_tpl) {
+function content_6a9fe0414d5f07_51734956 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/var/www/html/sngine/content/themes/default/templates';
 $_smarty_tpl->renderSubTemplate('file:_head.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), (int) 0, $_smarty_current_dir);
 $_smarty_tpl->renderSubTemplate('file:_header.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), (int) 0, $_smarty_current_dir);
@@ -1044,6 +1044,30 @@ $_smarty_tpl->renderSubTemplate('file:_header.tpl', $_smarty_tpl->cache_id, $_sm
                           <?php if ($_smarty_tpl->getValue('marketplace_payments_insights')) {?><span class="float-end badge rounded-pill bg-danger"><?php echo $_smarty_tpl->getValue('marketplace_payments_insights');?>
 </span><?php }?>
                           <?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("Payment Requests");?>
+
+                        </a>
+                      </li>
+                      <li <?php if ($_smarty_tpl->getValue('view') == "market" && $_smarty_tpl->getValue('sub_view') == "affiliate_program") {?>class="active" <?php }?>>
+                        <a href="<?php echo $_smarty_tpl->getValue('system')['system_url'];?>
+/<?php echo $_smarty_tpl->getValue('control_panel')['url'];?>
+/market/affiliate_program">
+                          <?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("Affiliate Program");?>
+
+                        </a>
+                      </li>
+                      <li <?php if ($_smarty_tpl->getValue('view') == "market" && $_smarty_tpl->getValue('sub_view') == "affiliates") {?>class="active" <?php }?>>
+                        <a href="<?php echo $_smarty_tpl->getValue('system')['system_url'];?>
+/<?php echo $_smarty_tpl->getValue('control_panel')['url'];?>
+/market/affiliates">
+                          <?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("List Affiliates");?>
+
+                        </a>
+                      </li>
+                      <li <?php if ($_smarty_tpl->getValue('view') == "market" && $_smarty_tpl->getValue('sub_view') == "commissions") {?>class="active" <?php }?>>
+                        <a href="<?php echo $_smarty_tpl->getValue('system')['system_url'];?>
+/<?php echo $_smarty_tpl->getValue('control_panel')['url'];?>
+/market/commissions">
+                          <?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("List Commissions");?>
 
                         </a>
                       </li>

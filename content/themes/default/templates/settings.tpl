@@ -161,7 +161,7 @@
               {/if}
             {/if}
 
-            {if $system['packages_enabled'] || $user->_data['can_monetize_content'] || $user->_data['can_invite_users'] || $system['affiliates_enabled'] || $system['points_enabled'] || $user->_data['can_sell_products'] || $user->_data['can_raise_funding'] || $system['coinpayments_enabled'] || $system['bank_transfers_enabled']}
+            {if $system['packages_enabled'] || $user->_data['can_monetize_content'] || $user->_data['can_invite_users'] || $system['affiliates_enabled'] || $system['points_enabled'] || $user->_data['can_sell_products'] || $system['marketplace_affiliate_enabled'] || $user->_data['can_raise_funding'] || $system['coinpayments_enabled'] || $system['bank_transfers_enabled']}
               <div class="divider mtb5"></div>
             {/if}
 
@@ -272,6 +272,29 @@
               </li>
             {/if}
 
+            {if $system['marketplace_affiliate_enabled']}
+              <li {if $view == "marketplace_affiliates"}class="active" {/if}>
+                <a href="#marketplace-affiliates-settings" data-bs-toggle="collapse" {if $view == "marketplace_affiliates"}aria-expanded="true" {/if}>
+                  {include file='__svg_icons.tpl' icon="affiliates" class="main-icon mr10" width="24px" height="24px"}
+                  {__("Affiliate Program")}
+                </a>
+                <div class='collapse {if $view == "marketplace_affiliates"}show{/if}' id="marketplace-affiliates-settings">
+                  <ul>
+                    <li {if $view == "marketplace_affiliates" && $sub_view == ""}class="active" {/if}>
+                      <a href="{$system['system_url']}/settings/marketplace_affiliates">
+                        {__("Dashboard")}
+                      </a>
+                    </li>
+                    <li {if $view == "marketplace_affiliates" && $sub_view == "commissions"}class="active" {/if}>
+                      <a href="{$system['system_url']}/settings/marketplace_affiliates/commissions">
+                        {__("Commission History")}
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+            {/if}
+
             {if $user->_data['can_raise_funding']}
               <li {if $view == "funding"}class="active" {/if}>
                 <a href="{$system['system_url']}/settings/funding">
@@ -376,6 +399,8 @@
           {include file='settings.points.tpl'}
         {elseif $view == "market"}
           {include file='settings.market.tpl'}
+        {elseif $view == "marketplace_affiliates"}
+          {include file='settings.marketplace_affiliates.tpl'}
         {elseif $view == "funding"}
           {include file='settings.funding.tpl'}
         {elseif $view == "monetization"}

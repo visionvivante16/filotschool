@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.7.0, created on 2026-02-13 10:33:41
+/* Smarty version 5.7.0, created on 2026-09-08 10:46:15
   from 'file:_js_files.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.7.0',
-  'unifunc' => 'content_698efe05087849_75796510',
+  'unifunc' => 'content_6a9fe7779e2af4_67776379',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'f4ce89b5ddeaba15d74c1ea9c547a91afb263c05' => 
     array (
       0 => '_js_files.tpl',
-      1 => 1766144277,
+      1 => 1788864347,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   array (
   ),
 ))) {
-function content_698efe05087849_75796510 (\Smarty\Template $_smarty_tpl) {
+function content_6a9fe7779e2af4_67776379 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/var/www/html/sngine/content/themes/default/templates';
 ?><!-- Initialize --><?php echo '<script'; ?>
 >/* initialize vars */var site_title = "<?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')($_smarty_tpl->getValue('system')['system_title']);?>
@@ -72,6 +72,9 @@ if ($_smarty_tpl->getValue('system')['redirect_to_mobile_apps']) {?>var messagin
 echo '</script'; ?>
 ><?php echo '<script'; ?>
 >/* i18n for JS */var __ = [];__['Ask something'] = `<?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')('Ask something');?>
+`;__['Your Affiliate Link'] = `<?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')('Your Affiliate Link');?>
+`;__['Copy Link'] = `<?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')('Copy Link');?>
+`;__['Copied!'] = `<?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')('Copied!');?>
 `;__['Add Friend'] = `<?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')('Add Friend');?>
 `;__['Friends'] = `<?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')('Friends');?>
 `;__['Sent'] = `<?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')('Sent');?>
@@ -113,6 +116,14 @@ echo '</script'; ?>
 `;__['Boost'] = `<?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')('Boost');?>
 `;__['Unboost'] = `<?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')('Unboost');?>
 `;__['Mark as Paid'] = `<?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')('Mark as Paid');?>
+`;__['Suspend'] = `<?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')('Suspend');?>
+`;__['Activate'] = `<?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')('Activate');?>
+`;__['Approve'] = `<?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')('Approve');?>
+`;__['Reject'] = `<?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')('Reject');?>
+`;__['Are you sure you want to suspend this affiliate?'] = `<?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')('Are you sure you want to suspend this affiliate?');?>
+`;__['Are you sure you want to activate this affiliate?'] = `<?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')('Are you sure you want to activate this affiliate?');?>
+`;__['Are you sure you want to approve this commission?'] = `<?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')('Are you sure you want to approve this commission?');?>
+`;__['Are you sure you want to reject this commission?'] = `<?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')('Are you sure you want to reject this commission?');?>
 `;__['Read more'] = `<?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')('Read more');?>
 `;__['Read less'] = `<?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')('Read less');?>
 `;__['Turn On Active Status'] = `<?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')('Turn On Active Status');?>
@@ -491,15 +502,15 @@ if ($_smarty_tpl->getValue('view') == "earnings" && $_smarty_tpl->getValue('sub_
 echo '<script'; ?>
 >$(function() {$('#payment-methods-chart').highcharts({lang: {viewFullscreen: __['View Fullscreen'],printChart: __['Print Chart'],downloadPNG: __['Download PNG'],downloadJPEG: __['Download JPEG'],downloadPDF: __['Download PDF'],downloadSVG: __['Download SVG vector image'],contextButtonTitle: __['Chart context menu'],},chart: {type: 'column',backgroundColor: 'transparent',},title: {text: __['PayIn Methods']},xAxis: {categories: [__['Jan'],__['Feb'],__['Mar'],__['Apr'],__['May'],__['Jun'],__['Jul'],__['Aug'],__['Sep'],__['Oct'],__['Nov'],__['Dec']],crosshair: true},yAxis: {min: 0,title: {text: __['Total'] + ' ' + '(' + currency + ')'}},tooltip: {headerFormat: '<span style="font-size:10px">{point.key}</span><table>',pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +'<td style="padding:0"><b>{point.y}</b></td></tr>',footerFormat: '</table>',shared: true,useHTML: true},plotOptions: {column: {pointPadding: 0.2,borderWidth: 0}},series: [<?php
 $_from = $_smarty_tpl->getSmarty()->getRuntime('Foreach')->init($_smarty_tpl, $_smarty_tpl->getValue('payment_methods'), 'method');
-$foreach8DoElse = true;
+$foreach0DoElse = true;
 foreach ($_from ?? [] as $_smarty_tpl->getVariable('method')->value) {
-$foreach8DoElse = false;
+$foreach0DoElse = false;
 ?>{name: '<?php echo $_smarty_tpl->getSmarty()->getModifierCallback('capitalize')($_smarty_tpl->getValue('method'));?>
 ',data: [<?php
 $_from = $_smarty_tpl->getSmarty()->getRuntime('Foreach')->init($_smarty_tpl, $_smarty_tpl->getValue('payment_methods_chart'), 'payments', false, 'month');
-$foreach9DoElse = true;
+$foreach1DoElse = true;
 foreach ($_from ?? [] as $_smarty_tpl->getVariable('month')->value => $_smarty_tpl->getVariable('payments')->value) {
-$foreach9DoElse = false;
+$foreach1DoElse = false;
 echo $_smarty_tpl->getValue('payments')[$_smarty_tpl->getValue('method')];?>
 ,<?php
 }
@@ -507,15 +518,15 @@ $_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>]},
 }
 $_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>]});$('#payment-handles-chart').highcharts({lang: {viewFullscreen: __['View Fullscreen'],printChart: __['Print Chart'],downloadPNG: __['Download PNG'],downloadJPEG: __['Download JPEG'],downloadPDF: __['Download PDF'],downloadSVG: __['Download SVG vector image'],contextButtonTitle: __['Chart context menu'],},chart: {type: 'column',backgroundColor: 'transparent',},title: {text: __['PayIn Types']},xAxis: {categories: [__['Jan'],__['Feb'],__['Mar'],__['Apr'],__['May'],__['Jun'],__['Jul'],__['Aug'],__['Sep'],__['Oct'],__['Nov'],__['Dec']],crosshair: true},yAxis: {min: 0,title: {text: __['Total'] + ' ' + '(' + currency + ')'}},tooltip: {headerFormat: '<span style="font-size:10px">{point.key}</span><table>',pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +'<td style="padding:0"><b>{point.y}</b></td></tr>',footerFormat: '</table>',shared: true,useHTML: true},plotOptions: {column: {pointPadding: 0.2,borderWidth: 0}},series: [<?php
 $_from = $_smarty_tpl->getSmarty()->getRuntime('Foreach')->init($_smarty_tpl, $_smarty_tpl->getValue('payment_handles'), 'handle');
-$foreach10DoElse = true;
+$foreach2DoElse = true;
 foreach ($_from ?? [] as $_smarty_tpl->getVariable('handle')->value) {
-$foreach10DoElse = false;
+$foreach2DoElse = false;
 ?>{name: '<?php echo $_smarty_tpl->getSmarty()->getModifierCallback('capitalize')($_smarty_tpl->getValue('handle'));?>
 ',data: [<?php
 $_from = $_smarty_tpl->getSmarty()->getRuntime('Foreach')->init($_smarty_tpl, $_smarty_tpl->getValue('payment_handles_chart'), 'payments', false, 'month');
-$foreach11DoElse = true;
+$foreach3DoElse = true;
 foreach ($_from ?? [] as $_smarty_tpl->getVariable('month')->value => $_smarty_tpl->getVariable('payments')->value) {
-$foreach11DoElse = false;
+$foreach3DoElse = false;
 echo $_smarty_tpl->getValue('payments')[$_smarty_tpl->getValue('handle')];?>
 ,<?php
 }
@@ -527,15 +538,15 @@ if ($_smarty_tpl->getValue('view') == "earnings" && $_smarty_tpl->getValue('sub_
 echo '<script'; ?>
 >$(function() {$('#commissions-chart').highcharts({lang: {viewFullscreen: __['View Fullscreen'],printChart: __['Print Chart'],downloadPNG: __['Download PNG'],downloadJPEG: __['Download JPEG'],downloadPDF: __['Download PDF'],downloadSVG: __['Download SVG vector image'],contextButtonTitle: __['Chart context menu'],},chart: {type: 'column',backgroundColor: 'transparent',},title: {text: __['Commissions Types']},xAxis: {categories: [__['Jan'],__['Feb'],__['Mar'],__['Apr'],__['May'],__['Jun'],__['Jul'],__['Aug'],__['Sep'],__['Oct'],__['Nov'],__['Dec']],crosshair: true},yAxis: {min: 0,title: {text: __['Total'] + ' ' + '(' + currency + ')'}},tooltip: {headerFormat: '<span style="font-size:10px">{point.key}</span><table>',pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +'<td style="padding:0"><b>{point.y}</b></td></tr>',footerFormat: '</table>',shared: true,useHTML: true},plotOptions: {column: {pointPadding: 0.2,borderWidth: 0}},series: [<?php
 $_from = $_smarty_tpl->getSmarty()->getRuntime('Foreach')->init($_smarty_tpl, $_smarty_tpl->getValue('commissions_handles'), 'handle');
-$foreach12DoElse = true;
+$foreach4DoElse = true;
 foreach ($_from ?? [] as $_smarty_tpl->getVariable('handle')->value) {
-$foreach12DoElse = false;
+$foreach4DoElse = false;
 ?>{name: '<?php echo $_smarty_tpl->getSmarty()->getModifierCallback('capitalize')($_smarty_tpl->getValue('handle'));?>
 ',data: [<?php
 $_from = $_smarty_tpl->getSmarty()->getRuntime('Foreach')->init($_smarty_tpl, $_smarty_tpl->getValue('commissions_handles_chart'), 'commissions', false, 'month');
-$foreach13DoElse = true;
+$foreach5DoElse = true;
 foreach ($_from ?? [] as $_smarty_tpl->getVariable('month')->value => $_smarty_tpl->getVariable('commissions')->value) {
-$foreach13DoElse = false;
+$foreach5DoElse = false;
 echo $_smarty_tpl->getValue('commissions')[$_smarty_tpl->getValue('handle')];?>
 ,<?php
 }
@@ -547,9 +558,9 @@ if ($_smarty_tpl->getValue('view') == "earnings" && $_smarty_tpl->getValue('sub_
 echo '<script'; ?>
 >$(function() {$('#admin-chart-earnings').highcharts({lang: {viewFullscreen: __['View Fullscreen'],printChart: __['Print Chart'],downloadPNG: __['Download PNG'],downloadJPEG: __['Download JPEG'],downloadPDF: __['Download PDF'],downloadSVG: __['Download SVG vector image'],contextButtonTitle: __['Chart context menu'],},chart: {type: 'column',backgroundColor: 'transparent',},title: {text: __['Packages']},xAxis: {categories: [__['Jan'],__['Feb'],__['Mar'],__['Apr'],__['May'],__['Jun'],__['Jul'],__['Aug'],__['Sep'],__['Oct'],__['Nov'],__['Dec']],crosshair: true},yAxis: {min: 0,title: {text: __['Total'] + ' ' + '(' + currency + ')'}},tooltip: {headerFormat: '<span style="font-size:10px">{point.key}</span><table>',pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +'<td style="padding:0"><b>{point.y}</b></td></tr>',footerFormat: '</table>',shared: true,useHTML: true},plotOptions: {column: {pointPadding: 0.2,borderWidth: 0}},series: [<?php
 $_from = $_smarty_tpl->getSmarty()->getRuntime('Foreach')->init($_smarty_tpl, $_smarty_tpl->getValue('rows'), 'value', false, 'key');
-$foreach14DoElse = true;
+$foreach6DoElse = true;
 foreach ($_from ?? [] as $_smarty_tpl->getVariable('key')->value => $_smarty_tpl->getVariable('value')->value) {
-$foreach14DoElse = false;
+$foreach6DoElse = false;
 ?>{name: "<?php echo $_smarty_tpl->getValue('key');?>
 ",data: [<?php echo $_smarty_tpl->getSmarty()->getModifierCallback('join')($_smarty_tpl->getValue('value')['months_sales'],",");?>
 ]},<?php

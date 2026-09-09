@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.7.0, created on 2026-02-26 09:18:35
+/* Smarty version 5.7.0, created on 2026-09-08 10:22:30
   from 'file:settings.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.7.0',
-  'unifunc' => 'content_69a00feb517363_43373301',
+  'unifunc' => 'content_6a9fe1e6541b18_77689494',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'ac758a56b9c164c843257d36a9ede68c07c786dd' => 
     array (
       0 => 'settings.tpl',
-      1 => 1729424915,
+      1 => 1788862897,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   array (
     'file:_head.tpl' => 1,
     'file:_header.tpl' => 1,
-    'file:__svg_icons.tpl' => 22,
+    'file:__svg_icons.tpl' => 23,
     'file:settings.account.tpl' => 1,
     'file:settings.profile.tpl' => 1,
     'file:settings.security.tpl' => 1,
@@ -33,6 +33,7 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
     'file:settings.affiliates.tpl' => 1,
     'file:settings.points.tpl' => 1,
     'file:settings.market.tpl' => 1,
+    'file:settings.marketplace_affiliates.tpl' => 1,
     'file:settings.funding.tpl' => 1,
     'file:settings.monetization.tpl' => 1,
     'file:settings.coinpayments.tpl' => 1,
@@ -46,7 +47,7 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
     'file:_footer.tpl' => 1,
   ),
 ))) {
-function content_69a00feb517363_43373301 (\Smarty\Template $_smarty_tpl) {
+function content_6a9fe1e6541b18_77689494 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = '/var/www/html/sngine/content/themes/default/templates';
 $_smarty_tpl->renderSubTemplate('file:_head.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), (int) 0, $_smarty_current_dir);
 $_smarty_tpl->renderSubTemplate('file:_header.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), (int) 0, $_smarty_current_dir);
@@ -257,7 +258,7 @@ $_smarty_tpl->renderSubTemplate('file:_header.tpl', $_smarty_tpl->cache_id, $_sm
               <?php }?>
             <?php }?>
 
-            <?php if ($_smarty_tpl->getValue('system')['packages_enabled'] || $_smarty_tpl->getValue('user')->_data['can_monetize_content'] || $_smarty_tpl->getValue('user')->_data['can_invite_users'] || $_smarty_tpl->getValue('system')['affiliates_enabled'] || $_smarty_tpl->getValue('system')['points_enabled'] || $_smarty_tpl->getValue('user')->_data['can_sell_products'] || $_smarty_tpl->getValue('user')->_data['can_raise_funding'] || $_smarty_tpl->getValue('system')['coinpayments_enabled'] || $_smarty_tpl->getValue('system')['bank_transfers_enabled']) {?>
+            <?php if ($_smarty_tpl->getValue('system')['packages_enabled'] || $_smarty_tpl->getValue('user')->_data['can_monetize_content'] || $_smarty_tpl->getValue('user')->_data['can_invite_users'] || $_smarty_tpl->getValue('system')['affiliates_enabled'] || $_smarty_tpl->getValue('system')['points_enabled'] || $_smarty_tpl->getValue('user')->_data['can_sell_products'] || $_smarty_tpl->getValue('system')['marketplace_affiliate_enabled'] || $_smarty_tpl->getValue('user')->_data['can_raise_funding'] || $_smarty_tpl->getValue('system')['coinpayments_enabled'] || $_smarty_tpl->getValue('system')['bank_transfers_enabled']) {?>
               <div class="divider mtb5"></div>
             <?php }?>
 
@@ -394,6 +395,35 @@ $_smarty_tpl->renderSubTemplate('file:_header.tpl', $_smarty_tpl->cache_id, $_sm
                   <?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("Marketplace");?>
 
                 </a>
+              </li>
+            <?php }?>
+
+            <?php if ($_smarty_tpl->getValue('system')['marketplace_affiliate_enabled']) {?>
+              <li <?php if ($_smarty_tpl->getValue('view') == "marketplace_affiliates") {?>class="active" <?php }?>>
+                <a href="#marketplace-affiliates-settings" data-bs-toggle="collapse" <?php if ($_smarty_tpl->getValue('view') == "marketplace_affiliates") {?>aria-expanded="true" <?php }?>>
+                  <?php $_smarty_tpl->renderSubTemplate('file:__svg_icons.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array('icon'=>"affiliates",'class'=>"main-icon mr10",'width'=>"24px",'height'=>"24px"), (int) 0, $_smarty_current_dir);
+?>
+                  <?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("Affiliate Program");?>
+
+                </a>
+                <div class='collapse <?php if ($_smarty_tpl->getValue('view') == "marketplace_affiliates") {?>show<?php }?>' id="marketplace-affiliates-settings">
+                  <ul>
+                    <li <?php if ($_smarty_tpl->getValue('view') == "marketplace_affiliates" && $_smarty_tpl->getValue('sub_view') == '') {?>class="active" <?php }?>>
+                      <a href="<?php echo $_smarty_tpl->getValue('system')['system_url'];?>
+/settings/marketplace_affiliates">
+                        <?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("Dashboard");?>
+
+                      </a>
+                    </li>
+                    <li <?php if ($_smarty_tpl->getValue('view') == "marketplace_affiliates" && $_smarty_tpl->getValue('sub_view') == "commissions") {?>class="active" <?php }?>>
+                      <a href="<?php echo $_smarty_tpl->getValue('system')['system_url'];?>
+/settings/marketplace_affiliates/commissions">
+                        <?php echo $_smarty_tpl->getSmarty()->getModifierCallback('__')("Commission History");?>
+
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </li>
             <?php }?>
 
@@ -534,6 +564,9 @@ $_smarty_tpl->renderSubTemplate('file:_header.tpl', $_smarty_tpl->cache_id, $_sm
 ?>
         <?php } elseif ($_smarty_tpl->getValue('view') == "market") {?>
           <?php $_smarty_tpl->renderSubTemplate('file:settings.market.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), (int) 0, $_smarty_current_dir);
+?>
+        <?php } elseif ($_smarty_tpl->getValue('view') == "marketplace_affiliates") {?>
+          <?php $_smarty_tpl->renderSubTemplate('file:settings.marketplace_affiliates.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), (int) 0, $_smarty_current_dir);
 ?>
         <?php } elseif ($_smarty_tpl->getValue('view') == "funding") {?>
           <?php $_smarty_tpl->renderSubTemplate('file:settings.funding.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), (int) 0, $_smarty_current_dir);

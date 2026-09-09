@@ -547,6 +547,59 @@ try {
       }
       break;
 
+    case 'marketplace_affiliates':
+      // check if the marketplace affiliate program is enabled
+      if (!$system['marketplace_affiliate_enabled']) {
+        _error(404);
+      }
+
+      // get content
+      switch ($_GET['sub_view']) {
+        case '':
+          // page header
+          page_header(__("Settings") . " &rsaquo; " . __("Affiliate Program"));
+
+          // get stats & promoted products
+          $marketplace_affiliate_dashboard = $user->marketplace_affiliate_dashboard();
+          /* assign variables */
+          $smarty->assign('marketplace_affiliate_stats', $marketplace_affiliate_dashboard['stats']);
+          $smarty->assign('marketplace_affiliate_products', $marketplace_affiliate_dashboard['products']);
+          break;
+
+        case 'commissions':
+          // page header
+          page_header(__("Settings") . " &rsaquo; " . __("Affiliate Program") . " &rsaquo; " . __("Commission History"));
+
+          // get commission history
+          require('includes/class-pager.php');
+          $params['selected_page'] = (!isset($_GET['page']) || (int) $_GET['page'] == 0) ? 1 : $_GET['page'];
+          $total = $db->query(sprintf("SELECT COUNT(*) as count FROM marketplace_affiliate_commissions WHERE user_id = %s", secure($user->_data['user_id'], 'int')));
+          $params['total_items'] = $total->fetch_assoc()['count'];
+          $params['items_per_page'] = $system['max_results'];
+          $params['url'] = $system['system_url'] . '/settings/marketplace_affiliates/commissions?page=%s';
+          $pager = new Pager($params);
+          $limit_query = $pager->getLimitSql();
+          $get_rows = $db->query(sprintf(
+            "SELECT marketplace_affiliate_commissions.*, posts_products.name AS product_name, orders.order_hash FROM marketplace_affiliate_commissions INNER JOIN posts_products ON marketplace_affiliate_commissions.product_post_id = posts_products.post_id INNER JOIN orders ON marketplace_affiliate_commissions.order_id = orders.order_id WHERE marketplace_affiliate_commissions.user_id = %s ORDER BY marketplace_affiliate_commissions.id DESC " . $limit_query,
+            secure($user->_data['user_id'], 'int')
+          ));
+          $rows = [];
+          if ($get_rows->num_rows > 0) {
+            while ($row = $get_rows->fetch_assoc()) {
+              $rows[] = $row;
+            }
+          }
+          /* assign variables */
+          $smarty->assign('rows', $rows);
+          $smarty->assign('pager', $pager->getPager());
+          break;
+
+        default:
+          _error(404);
+          break;
+      }
+      break;
+
     case 'market':
       // check market permission
       if (!$user->_data['can_sell_products'] || !$system['market_shopping_cart_enabled']) {
