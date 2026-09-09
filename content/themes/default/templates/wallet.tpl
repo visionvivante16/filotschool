@@ -278,6 +278,8 @@
                                 {__("Donate")}
                               {elseif $transaction['node_type'] == "market" || $transaction['node_type'] == "market_payment"}
                                 {__("Market Purchase")}
+                              {elseif $transaction['node_type'] == "market_affiliate_commission"}
+                                {__("Affiliate Commission")}
                               {elseif $transaction['node_type'] == "paid_chat_message"}
                                 {__("Paid Chat Message")}
                               {elseif $transaction['node_type'] == "paid_call"}

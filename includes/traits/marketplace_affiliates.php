@@ -232,8 +232,9 @@ trait MarketplaceAffiliatesTrait
       $sale_amount = $order_item['price'] * $order_item['quantity'];
       $commission_amount = $sale_amount * $affiliate['commission_rate'] / 100;
 
+      /* commissions are auto-approved and paid out to the affiliate's wallet as soon as the sale is confirmed paid - no manual admin review step */
       $db->query(sprintf(
-        "INSERT IGNORE INTO marketplace_affiliate_commissions (marketplace_affiliate_id, user_id, product_post_id, order_id, order_item_id, sale_amount, commission_rate, commission_amount, status, insert_time, update_time) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, 'pending', %s, %s)",
+        "INSERT IGNORE INTO marketplace_affiliate_commissions (marketplace_affiliate_id, user_id, product_post_id, order_id, order_item_id, sale_amount, commission_rate, commission_amount, status, approved_time, insert_time, update_time) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, 'approved', %s, %s, %s)",
         secure($affiliate['id'], 'int'),
         secure($affiliate['user_id'], 'int'),
         secure($order_item['product_post_id'], 'int'),
@@ -243,8 +244,15 @@ trait MarketplaceAffiliatesTrait
         secure($affiliate['commission_rate'], 'float'),
         secure($commission_amount, 'float'),
         secure($date),
+        secure($date),
         secure($date)
       )) or _error("SQL_ERROR_THROWEN");
+
+      /* order_item_id is UNIQUE, so INSERT IGNORE only inserts (and affected_rows is 1) the first time a webhook/checkout confirms this item - guards against double-crediting the wallet on a repeated call */
+      if ($db->affected_rows > 0) {
+        $db->query(sprintf("UPDATE users SET user_wallet_balance = user_wallet_balance + %s WHERE user_id = %s", secure($commission_amount, 'float'), secure($affiliate['user_id'], 'int'))) or _error("SQL_ERROR_THROWEN");
+        $this->wallet_set_transaction($affiliate['user_id'], 'market_affiliate_commission', $db->insert_id, $commission_amount, 'in');
+      }
     }
   }
 
