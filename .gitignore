@@ -20,6 +20,7 @@ storage/logs/
 # Cache files
 cache/
 *.cache
+content/themes/default/templates_compiled/*
 
 # Session files
 sessions/
