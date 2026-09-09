@@ -113,6 +113,9 @@
     /* i18n for JS */
     var __ = [];
     __['Ask something'] = `{__('Ask something')}`;
+    __['Your Affiliate Link'] = `{__('Your Affiliate Link')}`;
+    __['Copy Link'] = `{__('Copy Link')}`;
+    __['Copied!'] = `{__('Copied!')}`;
     __['Add Friend'] = `{__('Add Friend')}`;
     __['Friends'] = `{__('Friends')}`; 
     __['Sent'] = `{__('Sent')}`;
@@ -154,6 +157,14 @@
     __['Boost'] = `{__('Boost')}`;
     __['Unboost'] = `{__('Unboost')}`;
     __['Mark as Paid'] = `{__('Mark as Paid')}`;
+    __['Suspend'] = `{__('Suspend')}`;
+    __['Activate'] = `{__('Activate')}`;
+    __['Approve'] = `{__('Approve')}`;
+    __['Reject'] = `{__('Reject')}`;
+    __['Are you sure you want to suspend this affiliate?'] = `{__('Are you sure you want to suspend this affiliate?')}`;
+    __['Are you sure you want to activate this affiliate?'] = `{__('Are you sure you want to activate this affiliate?')}`;
+    __['Are you sure you want to approve this commission?'] = `{__('Are you sure you want to approve this commission?')}`;
+    __['Are you sure you want to reject this commission?'] = `{__('Are you sure you want to reject this commission?')}`;
     __['Read more'] = `{__('Read more')}`;
     __['Read less'] = `{__('Read less')}`;
     __['Turn On Active Status'] = `{__('Turn On Active Status')}`;

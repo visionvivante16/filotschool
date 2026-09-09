@@ -19,8 +19,12 @@ try {
         redirect();
       }
 
-      // get the referer URL
-      referer_url();
+      // get the redirect destination (prefer an explicit ?redirect= over the HTTP referer, which is unreliable/lossy)
+      if (isset($_GET['redirect']) && is_safe_redirect_path($_GET['redirect'])) {
+        $_SESSION['callback_redirect'] = $_GET['redirect'];
+      } else {
+        referer_url();
+      }
 
       // page header
       page_header(__($system['system_title']) . " &rsaquo; " . __("Login"));
@@ -56,8 +60,12 @@ try {
         _error(404);
       }
 
-      // get the referer URL
-      referer_url();
+      // get the redirect destination (prefer an explicit ?redirect= over the HTTP referer, which is unreliable/lossy)
+      if (isset($_GET['redirect']) && is_safe_redirect_path($_GET['redirect'])) {
+        $_SESSION['callback_redirect'] = $_GET['redirect'];
+      } else {
+        referer_url();
+      }
 
       // page header
       page_header(__($system['system_title']) . " &rsaquo; " . __("Sign Up"));

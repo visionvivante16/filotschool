@@ -102,6 +102,8 @@ trait MarketplaceTrait
       }
       /* add order items */
       $db->query(sprintf("INSERT INTO orders_items (order_id, product_post_id, quantity, price) VALUES (%s, %s, %s, %s)", secure($order_id, 'int'), secure($cart_item['product_post_id'], 'int'), secure($cart_item['quantity'], 'int'), secure($cart_item['post']['product']['price'], 'float'))) or _error("SQL_ERROR_THROWEN");
+      /* marketplace affiliate: record attribution for this order item, if any */
+      $this->marketplace_affiliate_attribute_order_item($db->insert_id, $cart_item['product_post_id']);
       /* update order sub total */
       $item_total_price = $cart_item['post']['product']['price'] * $cart_item['quantity'];
       $orders[$order_index]['sub_total'] += $item_total_price;
@@ -172,8 +174,10 @@ trait MarketplaceTrait
       while ($order = $get_orders->fetch_assoc()) {
         /* update product quantity */
         $get_order_items = $db->query(sprintf("SELECT * FROM orders_items WHERE order_id = %s", secure($order['order_id'], 'int'))) or _error("SQL_ERROR_THROWEN");
+        $order_items = [];
         while ($order_item = $get_order_items->fetch_assoc()) {
           $db->query(sprintf("UPDATE posts_products SET quantity = quantity - %s WHERE post_id = %s", secure($order_item['quantity'], 'int'), secure($order_item['product_post_id'], 'int'))) or _error("SQL_ERROR_THROWEN");
+          $order_items[] = $order_item;
         }
         /* send notification to the seller */
         $this->post_notification(['to_user_id' => $order['seller_id'], 'action' => 'market_order', 'node_url' => $order['order_hash']]);
@@ -184,6 +188,10 @@ trait MarketplaceTrait
         /* update order as paid */
         $cash_on_delivery = ($cash_on_delivery) ? '1' : '0';
         $db->query(sprintf("UPDATE orders SET is_payment_done = '1', is_cash_on_delivery = %s WHERE order_id = %s", secure($cash_on_delivery), secure($order['order_id'], 'int'))) or _error("SQL_ERROR_THROWEN");
+        /* marketplace affiliate: create pending commissions for attributed order items (order_item_id is UNIQUE, safe against duplicate webhook calls) */
+        if ($order['is_payment_done'] != '1') {
+          $this->marketplace_affiliate_process_commissions($order, $order_items);
+        }
       }
     }
   }

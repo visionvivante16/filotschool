@@ -68,6 +68,7 @@ class User
     LiveStreamTrait,
     LoggerTrait,
     MarketplaceTrait,
+    MarketplaceAffiliatesTrait,
     MentionsTrait,
     MeritsTrait,
     MonetizationTrait,

@@ -28,6 +28,8 @@ try {
   if (!$post) {
     _error(404);
   }
+  /* marketplace affiliate: validate ?ref= referral, record click, store attribution */
+  $user->marketplace_affiliate_track_click($post);
   /* assign variables */
   $smarty->assign('post', $post);
 
