@@ -107,6 +107,8 @@ try {
       break;
 
     case 'approve_commission':
+      // new commissions are auto-approved and paid out at checkout time (see marketplace_affiliate_process_commissions()) -
+      // this only remains to manually clear any commission left over in 'pending' from before that change
       $get_commission = $db->query(sprintf("SELECT * FROM marketplace_affiliate_commissions WHERE id = %s", secure($_POST['id'], 'int'))) or _error("SQL_ERROR_THROWEN");
       if ($get_commission->num_rows == 0) {
         _error(400);
@@ -116,6 +118,8 @@ try {
         throw new Exception(__("This commission has already been reviewed"));
       }
       $db->query(sprintf("UPDATE marketplace_affiliate_commissions SET status = 'approved', approved_time = %s, update_time = %s WHERE id = %s", secure($date), secure($date), secure($_POST['id'], 'int'))) or _error("SQL_ERROR_THROWEN");
+      $db->query(sprintf("UPDATE users SET user_wallet_balance = user_wallet_balance + %s WHERE user_id = %s", secure($commission['commission_amount'], 'float'), secure($commission['user_id'], 'int'))) or _error("SQL_ERROR_THROWEN");
+      $user->wallet_set_transaction($commission['user_id'], 'market_affiliate_commission', $commission['id'], $commission['commission_amount'], 'in');
       break;
 
     case 'reject_commission':
