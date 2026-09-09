@@ -7646,6 +7646,29 @@ function is_safe_redirect_path($url)
 }
 
 
+/**
+ * system_domain_root
+ *
+ * The scheme+host(+port) portion of $system['system_url'], without its path.
+ * Needed because callback_redirect paths already carry the full site path
+ * (e.g. "/sngine/post.php?..." when the app is installed in a subdirectory),
+ * so redirecting must not re-prepend $system['system_url'] in full (which
+ * would duplicate that subdirectory).
+ *
+ * @return string
+ */
+function system_domain_root()
+{
+  global $system;
+  $url_parts = parse_url($system['system_url']);
+  $domain_root = $url_parts['scheme'] . '://' . $url_parts['host'];
+  if (isset($url_parts['port'])) {
+    $domain_root .= ':' . $url_parts['port'];
+  }
+  return $domain_root;
+}
+
+
 
 /* ------------------------------- */
 /* Modal */

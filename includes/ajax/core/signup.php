@@ -36,7 +36,7 @@ try {
   if ($_POST['oauth_app_id']) {
     return_json(['callback' => 'window.location.href = "' . $system['system_url'] . '/api/oauth?app_id=' . $_POST['oauth_app_id'] . '";']);
   } elseif ($callback_redirect) {
-    return_json(['callback' => 'window.location.href = ' . json_encode($system['system_url'] . $callback_redirect) . ';']);
+    return_json(['callback' => 'window.location.href = ' . json_encode(system_domain_root() . $callback_redirect) . ';']);
   } else {
     return_json(['callback' => 'window.location.reload();']);
   }
